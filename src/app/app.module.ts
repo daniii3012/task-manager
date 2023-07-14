@@ -12,6 +12,10 @@ import { HomeComponent } from './pages/home/home.component';
 import { TaskManagerComponent } from './pages/task-manager/task-manager.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RecentTasksComponent } from './components/home/recent-tasks/recent-tasks.component';
+import { TaskListComponent } from './components/task/task-list/task-list.component';
+import { TaskItemComponent } from './components/task/task-item/task-item.component';
+import { TaskFormComponent } from './components/task/task-form/task-form.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -20,11 +24,15 @@ import { RecentTasksComponent } from './components/home/recent-tasks/recent-task
     HomeComponent,
     TaskManagerComponent,
     LoginComponent,
-    RecentTasksComponent
+    RecentTasksComponent,
+    TaskListComponent,
+    TaskItemComponent,
+    TaskFormComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
+    FormsModule,
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),
     provideFirestore(() => getFirestore())

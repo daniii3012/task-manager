@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 
 @Component({
   selector: 'app-task-manager',
@@ -6,5 +7,22 @@ import { Component } from '@angular/core';
   styleUrls: ['./task-manager.component.scss']
 })
 export class TaskManagerComponent {
+
+  user: any;
+
+  constructor(private authService: AuthService) {
+    this.isLogged();
+    this.getUser();
+  }
+
+  isLogged() {
+    return this.authService.isLogged();
+  }
+
+  getUser() {
+    if(this.isLogged()) {
+      this.user = this.authService.getUser();
+    }
+  }
 
 }

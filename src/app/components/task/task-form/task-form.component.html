@@ -1,0 +1,33 @@
+<div class="card">
+    <div class="card-body">
+        Add task <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal">Primary</button>
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="taskModalLabel">Añadir nueva tarea</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="taskTitle" class="form-label">Título</label>&nbsp;<span id="passwordHelpInline" class="form-text">Opcional</span>
+                        <input [(ngModel)]="taskTitle" name="taskTitle" type="text" class="form-control" id="taskTitle" placeholder="Título de tarea">
+                    </div>
+                    <div class="mb-3">
+                        <label for="taskDescription" class="form-label">Descripción</label>
+                        <textarea [(ngModel)]="taskDescription" name="taskDescription" class="form-control" id="taskDescription" rows="3" maxlength="75"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" (click)="addTask()" [disabled]="!taskDescription">Añadir</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
