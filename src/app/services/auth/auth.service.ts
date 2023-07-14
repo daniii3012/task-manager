@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Auth, User, getRedirectResult, signInWithRedirect, user } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 import { GoogleAuthProvider, signInWithPopup, signOut } from '@firebase/auth';
 
 @Injectable({
@@ -8,9 +9,11 @@ import { GoogleAuthProvider, signInWithPopup, signOut } from '@firebase/auth';
 export class AuthService {
 
   private user: User | undefined;
-  private expirationTime: Date | undefined;
 
-  constructor(private auth: Auth) {
+  constructor(
+    private auth: Auth,
+    private router: Router
+    ) {
     user(this.auth).subscribe(
       data => {
         if (data) {
@@ -39,17 +42,26 @@ export class AuthService {
     signInWithPopup(this.auth, new GoogleAuthProvider()).then(
       res => {
         //console.log('Successfully logged', res);
+        this.signInRedirect();
       }
     ).catch(err => console.error(err));
-    
+
   }
 
   signOutApp() {
     signOut(this.auth).then(
       () => {
-        //
+        this.signOutRedirect();
       }
     ).catch(err => console.error(err));
+  }
+
+  signInRedirect() {
+    this.router.navigate(['/home']);
+  }
+
+  signOutRedirect() {
+    this.router.navigate(['/home']);
   }
 
   getUser() {
