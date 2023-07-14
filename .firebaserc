@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "task-manager-e3516": {
+      "hosting": {
+        "task-manager": [
+          "task-manager-dani"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "task-manager-e3516"
+  }
+}
