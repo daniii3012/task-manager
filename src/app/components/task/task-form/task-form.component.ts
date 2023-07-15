@@ -32,24 +32,36 @@ export class TaskFormComponent {
   }
 
   addTask() {
-    const data = {
-      //taskTitle: this.taskTitle,
-      taskDescription: this.taskDescription,
-      taskCategory: this.selectedCategory.name,
-      catId: this.selectedCategory.id,
-      taskDate: new Date(),
-      taskModificationDate: new Date(),
-      status: this.status,
-      uid: this.user.uid
+    let data;
+    if(this.selectedCategory) {
+      data = {
+        //taskTitle: this.taskTitle,
+        taskDescription: this.taskDescription,
+        taskCategory: this.selectedCategory.name,
+        catId: this.selectedCategory.id,
+        taskDate: new Date(),
+        taskModificationDate: new Date(),
+        status: this.status,
+        uid: this.user.uid
+      }
+      this.categoryService.updateTaskCategory(this.selectedCategory.id, true);
+    } else {
+      data = {
+        //taskTitle: this.taskTitle,
+        taskDescription: this.taskDescription,
+        taskCategory: null,
+        catId: null,
+        taskDate: new Date(),
+        taskModificationDate: new Date(),
+        status: this.status,
+        uid: this.user.uid
+      }
     }
-
+    
     //console.log(data);
     //this.taskTitle = null;
     this.taskDescription = null;
     this.taskService.addTask(data);
-
-    this.categoryService.updateTaskCategory(this.selectedCategory, true);
-    this.selectedCategory = null;
   }
 
   setCategory(category: any) {

@@ -14,14 +14,13 @@ export class CategoryService {
     return addDoc(collection(this.firestore, 'category'), category);
   }
 
-  updateTaskCategory(category: any, operation: any) {
-    console.log(operation);
+  updateTaskCategory(catId: any, operation: any) {
     if (operation) {
-      return updateDoc(doc(this.firestore, `category/${category.id}`), {
+      return updateDoc(doc(this.firestore, `category/${catId}`), {
         taskCount: increment(1)
       });
     } else {
-      return updateDoc(doc(this.firestore, `category/${category.id}`), {
+      return updateDoc(doc(this.firestore, `category/${catId}`), {
         taskCount: increment(-1)
       });
     }

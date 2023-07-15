@@ -44,15 +44,6 @@ export class TaskListComponent {
     }
   }
 
-  updateTask(data: any) {
-    //console.log(data.status);
-    this.taskService.updateTask(data, !data.status);
-  }
-
-  deleteTask(task: any) {
-    this.taskService.deleteTask(task);
-  }
-
   getAllTask() {
     if (this.taskSubscription)
       this.taskSubscription.unsubscribe();
