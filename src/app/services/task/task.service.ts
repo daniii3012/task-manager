@@ -16,7 +16,6 @@ export class TaskService {
   }
 
   updateTask(task: any, status: boolean) {
-    console.log("service_", "aca actualiza el doc");
     return updateDoc(doc(this.firestore, `task/${task.id}`), {
       taskModificationDate: new Date(),
       status: status
@@ -28,7 +27,6 @@ export class TaskService {
   }
 
   getTaskByUser(uid: any) {
-    console.log("service_", "aca se llama a todas las tareas");
     return collectionData(
       query(collection(this.firestore, 'task'),
         orderBy('taskModificationDate', 'desc'),
@@ -38,7 +36,6 @@ export class TaskService {
   }
 
   getTaskByStatus(status: boolean, uid: any) {
-    console.log("service_", "aca se llama las tareas por estado");
     return collectionData(
       query(collection(this.firestore, 'task'),
         orderBy('taskModificationDate', 'desc'),

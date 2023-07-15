@@ -16,6 +16,9 @@ import { TaskListComponent } from './components/task/task-list/task-list.compone
 import { TaskItemComponent } from './components/task/task-item/task-item.component';
 import { TaskFormComponent } from './components/task/task-form/task-form.component';
 import { FormsModule } from '@angular/forms';
+import { TaskListUserComponent } from './components/task/task-list-user/task-list-user.component';
+import { TaskListFinishedComponent } from './components/task/task-list-finished/task-list-finished.component';
+import { TaskListUnfinishedComponent } from './components/task/task-list-unfinished/task-list-unfinished.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { FormsModule } from '@angular/forms';
     RecentTasksComponent,
     TaskListComponent,
     TaskItemComponent,
-    TaskFormComponent
+    TaskFormComponent,
+    TaskListUserComponent,
+    TaskListFinishedComponent,
+    TaskListUnfinishedComponent
   ],
   imports: [
     BrowserModule,

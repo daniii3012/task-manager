@@ -53,8 +53,8 @@ export class TaskListComponent {
 
   getTaskByStatusTrue() {
     this.allTaskButton = false;
-      this.finishedTaskButton = true;
-      this.unfinishedTaskButton = false;
+    this.finishedTaskButton = true;
+    this.unfinishedTaskButton = false;
     console.log('entra en la funcion Tareas ordenadas por: ', true);
     return this.taskService.getTaskByStatus(true, this.user.uid).subscribe(
       data => {
@@ -66,8 +66,8 @@ export class TaskListComponent {
 
   getTaskByStatusFalse() {
     this.allTaskButton = false;
-      this.finishedTaskButton = false;
-      this.unfinishedTaskButton = true;
+    this.finishedTaskButton = false;
+    this.unfinishedTaskButton = true;
     console.log('entra en la funcion Tareas ordenadas por: ', false);
     return this.taskService.getTaskByStatus(false, this.user.uid).subscribe(
       data => {
