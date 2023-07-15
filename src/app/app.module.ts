@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { FormsModule } from '@angular/forms';
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
@@ -15,10 +17,6 @@ import { RecentTasksComponent } from './components/home/recent-tasks/recent-task
 import { TaskListComponent } from './components/task/task-list/task-list.component';
 import { TaskItemComponent } from './components/task/task-item/task-item.component';
 import { TaskFormComponent } from './components/task/task-form/task-form.component';
-import { FormsModule } from '@angular/forms';
-import { TaskListUserComponent } from './components/task/task-list-user/task-list-user.component';
-import { TaskListFinishedComponent } from './components/task/task-list-finished/task-list-finished.component';
-import { TaskListUnfinishedComponent } from './components/task/task-list-unfinished/task-list-unfinished.component';
 
 @NgModule({
   declarations: [
@@ -30,10 +28,7 @@ import { TaskListUnfinishedComponent } from './components/task/task-list-unfinis
     RecentTasksComponent,
     TaskListComponent,
     TaskItemComponent,
-    TaskFormComponent,
-    TaskListUserComponent,
-    TaskListFinishedComponent,
-    TaskListUnfinishedComponent
+    TaskFormComponent
   ],
   imports: [
     BrowserModule,

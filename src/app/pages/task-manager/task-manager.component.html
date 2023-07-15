@@ -1,7 +1,4 @@
 <div class="container">
     <app-task-form [user]="user"></app-task-form>
-    <button type="button" class="btn btn-outline-primary" routerLink="/tasks/all" [disabled]="allTaskButton">All</button>
-    <button type="button" class="btn btn-outline-primary" routerLink="/tasks/unfinished" [disabled]="unfinishedTaskButton">Unfinished</button>
-    <button type="button" class="btn btn-outline-primary" routerLink="/tasks/finished" [disabled]="finishedTaskButton">Finished</button>
-    <!--<app-task-list [user]="user"></app-task-list>-->
+    <app-task-list [user]="user"></app-task-list>
 </div>
