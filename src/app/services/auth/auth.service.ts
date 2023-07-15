@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Auth, User, getRedirectResult, signInWithRedirect, user } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { GoogleAuthProvider, signInWithPopup, signOut } from '@firebase/auth';
@@ -8,7 +8,7 @@ import { GoogleAuthProvider, signInWithPopup, signOut } from '@firebase/auth';
 })
 export class AuthService {
 
-  private user: User | undefined;
+  private user: any;
 
   constructor(
     private auth: Auth,
@@ -65,12 +65,12 @@ export class AuthService {
   }
 
   getUser() {
-    return JSON.parse(localStorage.getItem('user') || '');
+    return (JSON.parse(localStorage.getItem('user') as string));
   }
 
   isLogged() {
-    if (JSON.parse(localStorage.getItem('user') || '')) {
-      let expirationDate = new Date(JSON.parse(localStorage.getItem('user') || '').stsTokenManager.expirationTime);
+    if (this.getUser()) {
+      let expirationDate = new Date(this.getUser().stsTokenManager.expirationTime);
       let currentDate = new Date();
       //console.log(expirationDate, currentDate);
       if (currentDate < expirationDate) {

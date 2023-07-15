@@ -15,6 +15,11 @@ export class TaskItemComponent {
   constructor(private taskService: TaskService) {
   }
 
+  changeList(e: any) {
+    //console.log("change");
+    this._updateTask(this.task);
+  }
+
   _updateTask(task: any) {
     this.updateTask.emit(task);
     //this.taskService.updateTask(task, status);

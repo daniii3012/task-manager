@@ -13,20 +13,27 @@ export class TaskListComponent {
   tasks: any = [];
   taskSubscription: any;
 
-  allTaskButton: boolean = true;
-  unfinishedTaskButton: boolean = true;
-  finishedTaskButton: boolean = true;
-
   constructor(private taskService: TaskService) {
   }
 
   ngOnInit() {
-    console.log('init: ');
-    this.getAllTask();
+    //this.getAllTask();
+    this.getTaskByStatusFalse();
+  }
+
+  changeList(e: any) {
+    //console.log(e.target.value);
+    if(e.target.value == "all") {
+      this.getAllTask();
+    } else if(e.target.value == "unfinished") {
+      this.getTaskByStatusFalse();
+    } else if(e.target.value == "finished") {
+      this.getTaskByStatusTrue();
+    }
   }
 
   updateTask(data: any) {
-    //console.log(data);
+    //console.log(data.status);
     this.taskService.updateTask(data, !data.status);
   }
 
@@ -37,10 +44,6 @@ export class TaskListComponent {
   getAllTask() {
     if (this.taskSubscription)
       this.taskSubscription.unsubscribe();
-
-    this.allTaskButton = true;
-    this.unfinishedTaskButton = false;
-    this.finishedTaskButton = false;
 
     this.taskSubscription = this.taskService.getTaskByUser(this.user.uid).subscribe(
       data => {
@@ -53,10 +56,6 @@ export class TaskListComponent {
     if (this.taskSubscription)
       this.taskSubscription.unsubscribe();
 
-    this.allTaskButton = false;
-    this.unfinishedTaskButton = true;
-    this.finishedTaskButton = false;
-
     this.taskSubscription = this.taskService.getTaskByStatus(false, this.user.uid).subscribe(
       data => {
         this.tasks = data;
@@ -67,10 +66,6 @@ export class TaskListComponent {
   getTaskByStatusTrue() {
     if (this.taskSubscription)
       this.taskSubscription.unsubscribe();
-
-    this.allTaskButton = false;
-    this.unfinishedTaskButton = false;
-    this.finishedTaskButton = true;
 
     this.taskSubscription = this.taskService.getTaskByStatus(true, this.user.uid).subscribe(
       data => {

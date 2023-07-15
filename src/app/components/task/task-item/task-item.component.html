@@ -1,26 +1,38 @@
-<div class="card">
+<div class="card border-0 shadow  my-4">
     <div class="card-header">
         <div class="row">
             <div class="col text-start">
                 <div *ngIf="task.taskTitle; else noTitle">
                     {{ task.taskTitle }}
                     <span class="badge text-bg-info" *ngIf="task.status">Finished</span>
-                    <span class="badge text-bg-info" *ngIf="!task.status">Unfinished</span>
+                    <!--<span class="badge text-bg-info" *ngIf="!task.status">Unfinished</span>-->
                 </div>
                 <ng-template #noTitle>
                     Task
                     <span class="badge text-bg-info" *ngIf="task.status">Finished</span>
-                    <span class="badge text-bg-info" *ngIf="!task.status">Unfinished</span>
+                    <!--<span class="badge text-bg-info" *ngIf="!task.status">Unfinished</span>-->
                 </ng-template>
             </div>
-            <div class="col text-end">
-                <small class="text-body-secondary">{{ task.taskModificationDate.seconds * 1000 | date: 'MMM dd, yyyy, h:mm a' }}</small>
+            <div class="col-auto text-end">
+                <!--
+                <input [(ngModel)]="task.status" class="form-check-input m-0 p-0" style="font-size: 1.8em;" type="checkbox" id="checkboxNoLabel" (change)="changeList($event)">
+                -->
+                
+                <button type="button" class="btn btn-outline-info btn-sm" (click)="_updateTask(task)" *ngIf="!task.status"><i class="bi-check2"></i></button>
+                <button type="button" class="btn btn-info btn-sm" (click)="_updateTask(task)" *ngIf="task.status"><i class="bi-check"></i></button>
+                
             </div>
         </div>
     </div>
-    <div class="card-body">
+    <div class="card-body bg-body-tertiary rounded-bottom-1">
         <p class="card-text">{{ task.taskDescription }}</p>
-        <p><button type="button" class="btn btn-outline-danger" (click)="_deleteTask(task)">Delete</button></p>
-        <p><button type="button" class="btn btn-outline-info" (click)="_updateTask(task)">Status</button></p>
+        <div class="row card-text">
+            <div class="col">
+                <small class="text-body-secondary text-lowercase">{{ task.taskModificationDate.seconds * 1000 | date: 'MMM dd, yyyy, h:mm a' }}</small>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-outline-danger btn-sm" (click)="_deleteTask(task)"><i class="bi-x"></i></button>
+            </div>
+        </div>
     </div>
 </div>

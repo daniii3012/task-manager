@@ -1,4 +1,41 @@
-<button type="button" class="btn btn-outline-primary" (click)="getAllTask()" [disabled]="allTaskButton">All</button>
-<button type="button" class="btn btn-outline-primary" (click)="getTaskByStatusFalse()" [disabled]="unfinishedTaskButton">Unfinished</button>
-<button type="button" class="btn btn-outline-primary" (click)="getTaskByStatusTrue()" [disabled]="finishedTaskButton">Finished</button>
-<app-task-item *ngFor="let task of tasks" [task]="task" (updateTask)="updateTask($event)" (deleteTask)="deleteTask($event)"></app-task-item>
+<div class="row justify-content-center pt-3 pb-1 px-2">
+    <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+        <div class="row">
+            <div class="col text-start">
+                Task:
+            </div>
+            <div class="col-auto text-end">
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="allTask" (change)="changeList($event)" value="all">
+                    <label class="form-check-label" for="allTask">All</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="unfinishedTask" (change)="changeList($event)" value="unfinished" checked>
+                    <label class="form-check-label" for="unfinishedTask">Unfinished</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="inlineRadioOptions" id="finishedTask" (change)="changeList($event)" value="finished">
+                    <label class="form-check-label" for="finishedTask">Finished</label>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+<div class="row justify-content-center p-2">
+    <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+        <div *ngIf="taskSubscription; else loading">
+            <app-task-item *ngFor="let task of tasks" [task]="task" (updateTask)="updateTask($event)" (deleteTask)="deleteTask($event)"></app-task-item>
+        </div>
+        <ng-template #loading>
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+        </ng-template>
+    </div>
+</div>
+
+
+

@@ -16,10 +16,17 @@ export class TaskService {
   }
 
   updateTask(task: any, status: boolean) {
-    return updateDoc(doc(this.firestore, `task/${task.id}`), {
-      taskModificationDate: new Date(),
-      status: status
-    });
+    if(!status) {
+      return updateDoc(doc(this.firestore, `task/${task.id}`), {
+        taskModificationDate: new Date(),
+        status: status
+      });
+    } else {
+      return updateDoc(doc(this.firestore, `task/${task.id}`), {
+        status: status
+      });
+    }
+    
   }
 
   deleteTask(task: any) {

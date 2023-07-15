@@ -1,6 +1,13 @@
 <div class="card">
     <div class="card-body">
-        Add task <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#taskModal">Primary</button>
+        <div class="row card-text">
+            <div class="col">
+                Add new task
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#taskModal"><i class="bi-plus"></i></button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -15,7 +22,7 @@
                 </div>
                 <div class="modal-body">
                     <div class="mb-3">
-                        <label for="taskTitle" class="form-label">Título</label>&nbsp;<span id="passwordHelpInline" class="form-text">Opcional</span>
+                        <label for="taskTitle" class="form-label">Título</label>&nbsp;<span id="helpInline" class="form-text">Opcional</span>
                         <input [(ngModel)]="taskTitle" name="taskTitle" type="text" class="form-control" id="taskTitle" placeholder="Título de tarea">
                     </div>
                     <div class="mb-3">
