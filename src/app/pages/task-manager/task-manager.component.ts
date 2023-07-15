@@ -11,6 +11,9 @@ export class TaskManagerComponent {
   user: any;
 
   constructor(private authService: AuthService) {
+  }
+
+  ngOnInit() {
     this.isLogged();
     this.getUser();
   }

@@ -1,1 +1,4 @@
-<p>task-list works!</p>
+<button type="button" class="btn btn-outline-primary" (click)="getAllTask()" [disabled]="allTaskButton">All</button>
+<button type="button" class="btn btn-outline-primary" (click)="getTaskByStatusFalse()" [disabled]="!finishedTaskButton && unfinishedTaskButton">Unfinished</button>
+<button type="button" class="btn btn-outline-primary" (click)="getTaskByStatusTrue()" [disabled]="finishedTaskButton && !unfinishedTaskButton">Finished</button>
+<app-task-item *ngFor="let task of tasks" [task]="task" (updateTask)="updateTask($event)" (deleteTask)="deleteTask($event)"></app-task-item>
