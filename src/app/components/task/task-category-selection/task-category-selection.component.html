@@ -1,0 +1,74 @@
+<button class="btn btn-outline-primary border-2 me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoryTask" aria-controls="categoryTask">
+    <i class="bi-list"></i>
+</button>
+
+<span *ngIf="!_selectedCategory" class="fw-bold">
+    To Do
+</span>
+<span *ngIf="_selectedCategory" class="fw-bold">
+    {{ _selectedCategory.name }}
+</span>
+
+
+
+<div class="offcanvas offcanvas-start" tabindex="-1" id="categoryTask" aria-labelledby="categoryTaskLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="categoryTaskLabel">Listas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body">
+
+        <div class="row my-2">
+            <div class="col">
+                <form>
+                    <div class="input-group">
+                        <span class="input-group-text" id="basic-addon1"><i class="bi-list-task"></i></span>
+                        <input [(ngModel)]="category" name="category" type="text" class="form-control" id="category" placeholder="Add new list">
+                    </div>
+                </form>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-primary btn" (click)="addCategory()" [disabled]="!category"><i class="bi-plus-lg"></i></button>
+            </div>
+        </div>
+        
+        <div class="list-group">
+            <div class="row">
+                <div class="col">
+                    <button type="button" class="list-group-item list-group-item-action rounded-2 shadow" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory == null}" (click)="getSelectedCategory(null)">
+                        <div class="row">
+                            <div class="col-auto">
+                                <i class="bi-list-task"></i>
+                            </div>
+                            <div class="col">
+                                To Do
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn-outline-secondary btn shadow" disabled><i class="bi-check2-all"></i></button>
+                </div>
+            </div>
+        
+            <div *ngFor="let category of categories" class="row">
+                <div class="col">
+                    <button type="button" class="list-group-item list-group-item-action rounded-2 shadow" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory == category}" (click)="getSelectedCategory(category)">
+                        <div class="row">
+                            <div class="col-auto">
+                                <i class="bi-list-ul"></i>
+                            </div>
+                            <div class="col">
+                                {{ category.name }}
+                            </div>
+                        </div>
+                    </button>
+                </div>
+                <div class="col-auto">
+                    <button type="button" class="btn btn shadow" data-bs-dismiss="offcanvas" [ngClass]="{'btn-danger': category.taskCount == 0, 'btn-outline-secondary': category.taskCount > 0}" (click)="deleteCategory(category)" [disabled]="category.taskCount > 0"><i class="bi-x-lg"></i></button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>

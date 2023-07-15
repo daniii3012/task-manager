@@ -32,6 +32,29 @@ export class TaskService {
     return deleteDoc(doc(this.firestore, `task/${task.id}`));
   }
 
+  getAllTaskByStatus(status: boolean, uid: any) {
+    return collectionData(
+      query(collection(this.firestore, 'task'),
+        orderBy('taskModificationDate', 'desc'),
+        where('status', '==', status),
+        where('uid', '==', uid)), {
+      idField: 'id'
+    }) as Observable<any[]>
+  }
+
+  getTaskByCategoryAndStatus(category: any, status: boolean, uid: any) {
+    return collectionData(
+      query(collection(this.firestore, 'task'),
+        orderBy('taskModificationDate', 'desc'),
+        where('taskCategory', '==', category.name),
+        where('status', '==', status),
+        where('uid', '==', uid)), {
+      idField: 'id'
+    }) as Observable<any[]>
+  }
+
+  // deprecated
+
   getTaskByUser(uid: any) {
     return collectionData(
       query(collection(this.firestore, 'task'),
@@ -56,17 +79,6 @@ export class TaskService {
       query(collection(this.firestore, 'task'),
         orderBy('taskModificationDate', 'desc'),
         where('taskCategory', '==', category),
-        where('uid', '==', uid)), {
-      idField: 'id'
-    }) as Observable<any[]>
-  }
-
-  getTaskByCategoryAndStatus(category: any, status: boolean, uid: any) {
-    return collectionData(
-      query(collection(this.firestore, 'task'),
-        orderBy('taskModificationDate', 'desc'),
-        where('taskCategory', '==', category),
-        where('status', '==', status),
         where('uid', '==', uid)), {
       idField: 'id'
     }) as Observable<any[]>
