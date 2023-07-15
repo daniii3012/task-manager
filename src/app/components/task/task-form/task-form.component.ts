@@ -25,14 +25,18 @@ export class TaskFormComponent {
     private taskService: TaskService,
     private categoryService: CategoryService
   ) {
-    //this.getCategories();
+  }
+
+  ngOnInit() {
+    this.getCategories();
   }
 
   addTask() {
     const data = {
       //taskTitle: this.taskTitle,
       taskDescription: this.taskDescription,
-      taskCategory: this.selectedCategory,
+      taskCategory: this.selectedCategory.name,
+      catId: this.selectedCategory.id,
       taskDate: new Date(),
       taskModificationDate: new Date(),
       status: this.status,
@@ -42,8 +46,10 @@ export class TaskFormComponent {
     //console.log(data);
     //this.taskTitle = null;
     this.taskDescription = null;
-    this.selectedCategory = null;
     this.taskService.addTask(data);
+
+    this.categoryService.updateTaskCategory(this.selectedCategory, true);
+    this.selectedCategory = null;
   }
 
   setCategory(category: any) {
@@ -57,7 +63,6 @@ export class TaskFormComponent {
     this.categorySubscription = this.categoryService.getCategoriesByUser(this.user.uid).subscribe(
       data => {
         this.categories = data;
-        console.log(this.categories);
       }
     );
   }
@@ -65,6 +70,7 @@ export class TaskFormComponent {
   addCategory() {
     const data = {
       name: this.category,
+      taskCount: 0,
       uid: this.user.uid
     }
     this.selectedCategory = this.category;
@@ -73,6 +79,7 @@ export class TaskFormComponent {
   }
 
   deleteCategory(category: any) {
+    this.selectedCategory = null;
     this.categoryService.deleteTaskCategory(category);
   }
 

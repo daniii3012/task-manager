@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { CategoryService } from 'src/app/services/task/category/category.service';
 import { TaskService } from 'src/app/services/task/task.service';
 
 @Component({
@@ -12,22 +13,33 @@ export class TaskListComponent {
 
   tasks: any = [];
   taskSubscription: any;
+  selectedSort: any;
 
-  constructor(private taskService: TaskService) {
+  selectedCategory: any = null;
+  categories: any = [];
+  categorySubscription: any;
+
+  constructor(
+    private taskService: TaskService,
+    private categoryService: CategoryService
+  ) {
   }
 
   ngOnInit() {
     //this.getAllTask();
     this.getTaskByStatusFalse();
+    this.getCategories();
   }
 
   changeList(e: any) {
     //console.log(e.target.value);
-    if(e.target.value == "all") {
+    this.selectedSort = e.target.value;
+    this.selectedCategory = null;
+    if (e.target.value == "all") {
       this.getAllTask();
-    } else if(e.target.value == "unfinished") {
+    } else if (e.target.value == "unfinished") {
       this.getTaskByStatusFalse();
-    } else if(e.target.value == "finished") {
+    } else if (e.target.value == "finished") {
       this.getTaskByStatusTrue();
     }
   }
@@ -72,6 +84,43 @@ export class TaskListComponent {
         this.tasks = data;
       }
     );
+  }
+
+  getTaskByCategory() {
+    if (this.taskSubscription)
+      this.taskSubscription.unsubscribe();
+
+    this.taskSubscription = this.taskService.getTaskByCategory(this.selectedCategory, this.user.uid).subscribe(
+      data => {
+        this.tasks = data;
+      }
+    )
+  }
+
+  getCategories() {
+    if (this.categorySubscription)
+      this.categorySubscription.unsubscribe();
+
+    this.categorySubscription = this.categoryService.getCategoriesByUser(this.user.uid).subscribe(
+      data => {
+        this.categories = data;
+      }
+    );
+  }
+
+  setCategory(category: any) {
+    console.log(category);
+    this.selectedCategory = category;
+    if (this.selectedCategory == null) {
+      console.log(this.selectedCategory, this.selectedSort);
+      //this.changeList(this.selectedSort);
+    } else if (this.selectedSort == "all") {
+      this.getTaskByCategory();
+    } else if (this.selectedSort == "unfinished") {
+      //this.getTaskByStatusFalse();
+    } else if (this.selectedSort == "finished") {
+      //this.getTaskByStatusTrue();
+    }
   }
 
 }

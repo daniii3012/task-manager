@@ -51,5 +51,26 @@ export class TaskService {
     }) as Observable<any[]>
   }
 
+  getTaskByCategory(category: any, uid: any) {
+    return collectionData(
+      query(collection(this.firestore, 'task'),
+        orderBy('taskModificationDate', 'desc'),
+        where('taskCategory', '==', category),
+        where('uid', '==', uid)), {
+      idField: 'id'
+    }) as Observable<any[]>
+  }
+
+  getTaskByCategoryAndStatus(category: any, status: boolean, uid: any) {
+    return collectionData(
+      query(collection(this.firestore, 'task'),
+        orderBy('taskModificationDate', 'desc'),
+        where('taskCategory', '==', category),
+        where('status', '==', status),
+        where('uid', '==', uid)), {
+      idField: 'id'
+    }) as Observable<any[]>
+  }
+
 }
 

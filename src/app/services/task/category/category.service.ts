@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where, increment } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,11 +7,24 @@ import { Observable } from 'rxjs';
 })
 export class CategoryService {
 
-  constructor(private firestore: Firestore) { 
+  constructor(private firestore: Firestore) {
   }
 
   addTaskCategory(category: any) {
     return addDoc(collection(this.firestore, 'category'), category);
+  }
+
+  updateTaskCategory(category: any, operation: any) {
+    console.log(operation);
+    if (operation) {
+      return updateDoc(doc(this.firestore, `category/${category.id}`), {
+        taskCount: increment(1)
+      });
+    } else {
+      return updateDoc(doc(this.firestore, `category/${category.id}`), {
+        taskCount: increment(-1)
+      });
+    }
   }
 
   deleteTaskCategory(category: any) {

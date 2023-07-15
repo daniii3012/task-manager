@@ -2,13 +2,13 @@
     <div class="card-header">
         <div class="row">
             <div class="col text-start">
-                <div *ngIf="task.taskTitle; else noTitle">
-                    {{ task.taskTitle }}
+                <div *ngIf="task.taskCategory; else noTitle">
+                    {{ task.taskCategory }}
                     <span class="badge text-bg-info" *ngIf="task.status">Finished</span>
                     <!--<span class="badge text-bg-info" *ngIf="!task.status">Unfinished</span>-->
                 </div>
                 <ng-template #noTitle>
-                    Task
+                    
                     <span class="badge text-bg-info" *ngIf="task.status">Finished</span>
                     <!--<span class="badge text-bg-info" *ngIf="!task.status">Unfinished</span>-->
                 </ng-template>
@@ -28,7 +28,7 @@
         <p class="card-text">{{ task.taskDescription }}</p>
         <div class="row card-text">
             <div class="col">
-                <small class="text-body-secondary">{{ task.taskModificationDate.seconds * 1000 | date: 'MMM dd, yyyy. h:mm a' }} &bull; {{ task.taskCategory }}</small>
+                <small class="text-body-secondary text-lowercase">{{ task.taskModificationDate.seconds * 1000 | date: 'MMM dd, yyyy. h:mm: a' }}</small>
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-outline-danger btn-sm" (click)="_deleteTask(task)"><i class="bi-x"></i></button>
