@@ -8,7 +8,6 @@ import { Observable } from 'rxjs';
 export class TaskService {
 
   constructor(private firestore: Firestore) { 
-    
   }
 
   addTask(task: any) {

@@ -38,7 +38,7 @@ export class TaskListComponent {
   }
 
   deleteTask(task: any) {
-    this.taskService.deleteTask(task)
+    this.taskService.deleteTask(task);
   }
 
   getAllTask() {

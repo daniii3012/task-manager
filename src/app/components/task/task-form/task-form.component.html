@@ -1,17 +1,65 @@
 <div class="card">
     <div class="card-body">
-        <div class="row card-text">
+        <div class="row">
             <div class="col">
-                Add new task
+                <form>
+                    <input [(ngModel)]="taskDescription" name="taskDescription" type="text" class="form-control form-control-sm" id="taskDescription" placeholder="Add new task">
+                </form>
+            </div>
+
+        </div>
+        <div class="row mt-2">
+            <div class="col">
+                <div class="dropdown d-grid">
+                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="getCategories()">
+                        <span *ngIf="!selectedCategory">
+                            Category
+                        </span>
+                        <span *ngIf="selectedCategory">
+                            {{ selectedCategory }}
+                        </span>
+                    </button>
+                    <ul class="dropdown-menu mx-0 border-0 shadow">
+                        <li *ngIf="categories.length == 0"><a class="dropdown-item" (click)="setCategory(null)">
+                                Sin categoría
+                            </a></li>
+                        <li *ngFor="let category of categories"><a class="dropdown-item" (click)="setCategory(category.name)">
+                                <div class="row">
+                                    <div class="col">
+                                        {{ category.name }}
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteCategory(category)"><i class="bi-x"></i></button>
+                                    </div>
+                                </div>
+                            </a></li>
+                        <li>
+                            <hr class="dropdown-divider">
+                        </li>
+                        <li><a class="dropdown-item">
+                                <div class="row">
+                                    <div class="col">
+                                        <form>
+                                            <input [(ngModel)]="category" name="category" type="text" class="form-control form-control-sm" id="category" placeholder="Add new category">
+                                        </form>
+                                    </div>
+                                    <div class="col-auto">
+                                        <button type="button" class="btn btn-secondary btn-sm" (click)="addCategory()" [disabled]="!category"><i class="bi-plus"></i></button>
+                                    </div>
+                                </div>
+                            </a></li>
+                    </ul>
+                </div>
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#taskModal"><i class="bi-plus"></i></button>
+                <button type="button" class="btn btn-secondary btn-sm" (click)="addTask()" [disabled]="!taskDescription"><i class="bi-plus"></i></button>
+                <!-- Botón modal <button type="button" class="btn btn-outline-light btn-sm" data-bs-toggle="modal" data-bs-target="#taskModal"><i class="bi-plus"></i></button>-->
             </div>
         </div>
     </div>
 </div>
 
-<!-- Modal -->
+<!-- Modal 
 <div class="modal fade" id="taskModal" tabindex="-1" aria-labelledby="taskModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
@@ -38,3 +86,4 @@
         </div>
     </div>
 </div>
+-->

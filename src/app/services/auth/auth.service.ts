@@ -39,7 +39,9 @@ export class AuthService {
     ).catch(err => console.error(err));
     */
     
-    signInWithPopup(this.auth, new GoogleAuthProvider()).then(
+    signInWithPopup(this.auth, new GoogleAuthProvider().setCustomParameters({
+      prompt: 'select_account'
+    })).then(
       res => {
         //console.log('Successfully logged', res);
         this.signInRedirect();
