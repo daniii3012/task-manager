@@ -33,7 +33,7 @@ export class TaskFormComponent {
 
   addTask() {
     let data;
-    if(this.selectedCategory) {
+    if (this.selectedCategory) {
       data = {
         //taskTitle: this.taskTitle,
         taskDescription: this.taskDescription,
@@ -57,7 +57,7 @@ export class TaskFormComponent {
         uid: this.user.uid
       }
     }
-    
+
     //console.log(data);
     //this.taskTitle = null;
     this.taskDescription = null;
@@ -85,9 +85,18 @@ export class TaskFormComponent {
       taskCount: 0,
       uid: this.user.uid
     }
-    this.selectedCategory = this.category;
+    this.categoryService.addTaskCategory(data).then(
+      docRef => {
+        const ref = {
+          name: data.name,
+          taskCount: 0,
+          uid: this.user.uid,
+          id: docRef.id
+        }
+        this.setCategory(ref);
+      }
+    );
     this.category = null;
-    this.categoryService.addTaskCategory(data);
   }
 
   deleteCategory(category: any) {

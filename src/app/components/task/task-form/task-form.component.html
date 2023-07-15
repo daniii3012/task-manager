@@ -11,9 +11,9 @@
         <div class="row mt-2">
             <div class="col">
                 <div class="dropdown d-grid">
-                    <button class="btn btn-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="getCategories()">
+                    <button class="btn btn-outline-primary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" (click)="getCategories()">
                         <span *ngIf="!selectedCategory">
-                            To Do
+                            Todos
                         </span>
                         <span *ngIf="selectedCategory">
                             {{ selectedCategory.name }}
@@ -23,7 +23,7 @@
                     <ul class="dropdown-menu gap-1 p-2 rounded-3 mx-0 border-0 shadow">
                         <li>
                             <a class="dropdown-item rounded-2" (click)="setCategory(null)">
-                                To Do
+                                Todos
                             </a>
                         </li>
                         <li *ngFor="let category of categories">
@@ -39,7 +39,8 @@
                                     </a>
                                 </div>
                                 <div class="col-auto">
-                                    <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteCategory(category)" [disabled]="category.taskCount > 0"><i class="bi-x"></i></button>
+                                    <button *ngIf="category.taskCount > 0" type="button" class="btn btn-outline-danger btn-sm" style="pointer-events: auto;" title="No pueden haber tareas con esta categoría" disabled><i class="bi-x"></i></button>
+                                    <button *ngIf="category.taskCount == 0" type="button" class="btn btn-outline-danger btn-sm" (click)="deleteCategory(category)"><i class="bi-x"></i></button>
                                 </div>
                             </div>
                             
