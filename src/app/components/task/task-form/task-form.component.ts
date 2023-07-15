@@ -12,8 +12,6 @@ export class TaskFormComponent {
 
   taskTitle: any;
   taskDescription: any;
-  taskDate = new Date();
-  taskModificationDate = new Date();
   status: boolean = false;
 
   constructor(
@@ -27,16 +25,16 @@ export class TaskFormComponent {
       data = {
         taskTitle: this.taskTitle,
         taskDescription: this.taskDescription,
-        taskDate: this.taskDate,
-        taskModificationDate: this.taskModificationDate,
+        taskDate: new Date(),
+        taskModificationDate: new Date(),
         status: this.status,
         uid: this.user.uid
       }
     } else {
       data = {
         taskDescription: this.taskDescription,
-        taskDate: this.taskDate,
-        taskModificationDate: this.taskModificationDate,
+        taskDate: new Date(),
+        taskModificationDate: new Date(),
         status: this.status,
         uid: this.user.uid
       }

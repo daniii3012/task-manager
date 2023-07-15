@@ -11,26 +11,22 @@ export class TaskListComponent {
   @Input() user: any;
 
   tasks: any = [];
+  taskSubscription: any;
 
-  allTaskButton: boolean = false;
-  finishedTaskButton: boolean = true;
+  allTaskButton: boolean = true;
   unfinishedTaskButton: boolean = true;
+  finishedTaskButton: boolean = true;
 
   constructor(private taskService: TaskService) {
   }
 
   ngOnInit() {
     console.log('init: ');
-    //this.getAllTask();
-  }
-
-  addTask() {
-    // To-do
+    this.getAllTask();
   }
 
   updateTask(data: any) {
     //console.log(data);
-    console.log("update task function");
     this.taskService.updateTask(data, !data.status);
   }
 
@@ -39,39 +35,45 @@ export class TaskListComponent {
   }
 
   getAllTask() {
-    this.allTaskButton = true;
-    this.finishedTaskButton = false;
-    this.unfinishedTaskButton = false;
-    console.log('entra en la funcion Todas las tareas');
-    return this.taskService.getTaskByUser(this.user.uid).subscribe(
-      data => {
-        console.log('todas las tareas: ');
-        this.tasks = data;
-      }
-    );
-  }
+    if (this.taskSubscription)
+      this.taskSubscription.unsubscribe();
 
-  getTaskByStatusTrue() {
-    this.allTaskButton = false;
-    this.finishedTaskButton = true;
+    this.allTaskButton = true;
     this.unfinishedTaskButton = false;
-    console.log('entra en la funcion Tareas ordenadas por: ', true);
-    return this.taskService.getTaskByStatus(true, this.user.uid).subscribe(
+    this.finishedTaskButton = false;
+
+    this.taskSubscription = this.taskService.getTaskByUser(this.user.uid).subscribe(
       data => {
-        console.log('Tareas ordenadas por: ', true);
         this.tasks = data;
       }
     );
   }
 
   getTaskByStatusFalse() {
+    if (this.taskSubscription)
+      this.taskSubscription.unsubscribe();
+
     this.allTaskButton = false;
-    this.finishedTaskButton = false;
     this.unfinishedTaskButton = true;
-    console.log('entra en la funcion Tareas ordenadas por: ', false);
-    return this.taskService.getTaskByStatus(false, this.user.uid).subscribe(
+    this.finishedTaskButton = false;
+
+    this.taskSubscription = this.taskService.getTaskByStatus(false, this.user.uid).subscribe(
       data => {
-        console.log('Tareas ordenadas por: ', false);
+        this.tasks = data;
+      }
+    );
+  }
+
+  getTaskByStatusTrue() {
+    if (this.taskSubscription)
+      this.taskSubscription.unsubscribe();
+
+    this.allTaskButton = false;
+    this.unfinishedTaskButton = false;
+    this.finishedTaskButton = true;
+
+    this.taskSubscription = this.taskService.getTaskByStatus(true, this.user.uid).subscribe(
+      data => {
         this.tasks = data;
       }
     );
