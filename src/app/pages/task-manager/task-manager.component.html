@@ -1,20 +1,23 @@
 <div class="container pt-2">
-    <div class="row justify-content-center p-2">
-        <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-            <app-task-category-selection [user]="user" (selectedCategory)="getTasksByCategory($event)"></app-task-category-selection>
+    <div class="sticky-top">
+        <div class="row justify-content-center p-2">
+            <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <app-task-category-selection [user]="user" (selectedCategory)="getTasksByCategory($event)"></app-task-category-selection>
+            </div>
+        </div>
+        <div class="row justify-content-center px-2">
+            <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <hr>
+            </div>
+        </div>
+    
+        <div class="row justify-content-center p-2">
+            <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+                <app-task-add [selectedCategory]="selectedCategory" [user]="user"></app-task-add>
+            </div>
         </div>
     </div>
-    <div class="row justify-content-center px-2">
-        <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-            <hr>
-        </div>
-    </div>
-
-    <div class="row justify-content-center p-2">
-        <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
-            <app-task-add [selectedCategory]="selectedCategory" [user]="user"></app-task-add>
-        </div>
-    </div>
+    
 
     <div class="row justify-content-center p-2">
         <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
