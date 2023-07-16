@@ -1,0 +1,17 @@
+<div class="card border-0 shadow">
+    <div class="card-body bg-body-tertiary rounded-2">
+        <div class="row card-text p-1">
+            <div class="col text-light-emphasis">
+                <form>
+                    <div class="input-group">
+                        <span class="input-group-text border-0 shadow-sm bg-dark-subtle" id="basic-addon1"><i class="bi-journal-plus"></i></span>
+                        <input [(ngModel)]="taskTitle" name="taskTitle" type="text" class="form-control border-0 shadow-sm" id="taskTitle" placeholder="Add new task">
+                    </div>
+                </form>
+            </div>
+            <div class="col-auto">
+                <button type="button" class="btn btn-secondary border-0 shadow-sm" (click)="addTask()" [disabled]="!taskTitle"><i class="bi-plus"></i></button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -44,7 +44,8 @@ export class TaskFormComponent {
         status: this.status,
         uid: this.user.uid
       }
-      this.categoryService.updateTaskCategory(this.selectedCategory.id, true);
+      this.categoryService.updateTaskCount(this.selectedCategory.id, true);
+      this.categoryService.updateUnfinishedCount(this.selectedCategory.id, true);
     } else {
       data = {
         //taskTitle: this.taskTitle,

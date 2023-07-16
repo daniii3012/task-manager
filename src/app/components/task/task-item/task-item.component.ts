@@ -19,22 +19,21 @@ export class TaskItemComponent {
   ) {
   }
 
-  /*
-  changeList(e: any) {
-    //console.log("change");
-    this.updateTask(this.task);
-  }
-  */
-
   updateTask(task: any, status: boolean) {
     //this.updateTask.emit(task);
+    if (task.catId) {
+      this.categoryService.updateUnfinishedCount(task.catId, !status);
+    }
     this.taskService.updateTask(task, status);
   }
 
   deleteTask(task: any) {
     //this.deleteTask.emit(task);
     if (task.catId) {
-      this.categoryService.updateTaskCategory(task.catId, false);
+      if(!task.status) {
+        this.categoryService.updateUnfinishedCount(task.catId, false);
+      }
+      this.categoryService.updateTaskCount(task.catId, false);
     }
     this.taskService.deleteTask(task);
   }

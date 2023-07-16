@@ -14,7 +14,7 @@ export class CategoryService {
     return addDoc(collection(this.firestore, 'category'), category);
   }
 
-  updateTaskCategory(catId: any, operation: any) {
+  updateTaskCount(catId: any, operation: any) {
     if (operation) {
       return updateDoc(doc(this.firestore, `category/${catId}`), {
         taskCount: increment(1)
@@ -22,6 +22,18 @@ export class CategoryService {
     } else {
       return updateDoc(doc(this.firestore, `category/${catId}`), {
         taskCount: increment(-1)
+      });
+    }
+  }
+
+  updateUnfinishedCount(catId: any, operation: any) {
+    if (operation) {
+      return updateDoc(doc(this.firestore, `category/${catId}`), {
+        taskUnfinishedCount: increment(1)
+      });
+    } else {
+      return updateDoc(doc(this.firestore, `category/${catId}`), {
+        taskUnfinishedCount: increment(-1)
       });
     }
   }

@@ -1,17 +1,23 @@
-<button class="btn btn-outline-primary border-2 me-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoryTask" aria-controls="categoryTask">
-    <i class="bi-list"></i>
-</button>
+<div class="row">
+    <div class="col-auto">
+        <button class="btn btn-outline-primary border-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoryTask" aria-controls="categoryTask" (click)="getSelectedCategory(_selectedCategory)">
+            <i class="bi-list"></i>
+        </button>
+    </div>
+    <div *ngIf="!_selectedCategory" class="col align-self-center fw-bold">
+        To Do
+    </div>
+    <div *ngIf="_selectedCategory" class="col align-self-center fw-bold">
+        {{ _selectedCategory.name }}
+    </div>
+    <div *ngIf="_selectedCategory" class="col-auto">
+        <button type="button" class="btn border-2 shadow-sm" [ngClass]="{'btn-danger': _selectedCategory.taskCount == 0, 'btn-outline-secondary': _selectedCategory.taskCount > 0}" (click)="deleteCategory(_selectedCategory)" [disabled]="_selectedCategory.taskCount > 0">
+            <i class="bi-x-lg"></i>
+        </button>
+    </div>
+</div>
 
-<span *ngIf="!_selectedCategory" class="fw-bold">
-    To Do
-</span>
-<span *ngIf="_selectedCategory" class="fw-bold">
-    {{ _selectedCategory.name }}
-</span>
-
-
-
-<div class="offcanvas offcanvas-start" tabindex="-1" id="categoryTask" aria-labelledby="categoryTaskLabel">
+<div class="offcanvas offcanvas-start bg-body-dark-subtle" tabindex="-1" id="categoryTask" aria-labelledby="categoryTaskLabel">
     <div class="offcanvas-header">
         <h5 class="offcanvas-title" id="categoryTaskLabel">Listas</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
@@ -22,52 +28,41 @@
             <div class="col">
                 <form>
                     <div class="input-group">
-                        <span class="input-group-text" id="basic-addon1"><i class="bi-list-task"></i></span>
-                        <input [(ngModel)]="category" name="category" type="text" class="form-control" id="category" placeholder="Add new list">
+                        <span class="input-group-text border-0 shadow-sm" id="basic-addon1"><i class="bi-list-task"></i></span>
+                        <input [(ngModel)]="category" name="category" type="text" class="form-control border-0 shadow-sm" id="category" placeholder="Add new list">
                     </div>
                 </form>
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-primary btn" (click)="addCategory()" [disabled]="!category"><i class="bi-plus-lg"></i></button>
+                <button type="button" class="btn btn-primary border-0 shadow-sm" (click)="addCategory()" [disabled]="!category"><i class="bi-plus-lg"></i></button>
             </div>
         </div>
-        
-        <div class="list-group">
-            <div class="row">
-                <div class="col">
-                    <button type="button" class="list-group-item list-group-item-action rounded-2 shadow" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory == null}" (click)="getSelectedCategory(null)">
-                        <div class="row">
-                            <div class="col-auto">
-                                <i class="bi-list-task"></i>
-                            </div>
-                            <div class="col">
-                                To Do
-                            </div>
-                        </div>
-                    </button>
+
+        <div class="list-group gap-2">
+            <button type="button" class="list-group-item list-group-item-action border-0 rounded-2 shadow" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory == null}" (click)="getSelectedCategory(null)">
+                <div class="row">
+                    <div class="col-auto">
+                        <i class="bi-list-task"></i>
+                    </div>
+                    <div class="col">
+                        To Do
+                    </div>
                 </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn-outline-secondary btn shadow" disabled><i class="bi-check2-all"></i></button>
+            </button>
+
+            <button *ngFor="let category of categories" type="button" class="list-group-item list-group-item-action border-0 rounded-2 shadow" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory == category}" (click)="getSelectedCategory(category)">
+                <div class="row">
+                    <div class="col-auto">
+                        <i class="bi-list-ul"></i>
+                    </div>
+                    <div class="col">
+                        {{ category.name }}
+                    </div>
+                    <div *ngIf="category.taskUnfinishedCount > 0" class="col-auto">
+                        <span class="badge bg-dark-subtle text-dark-emphasis">{{ category.taskUnfinishedCount }}</span>
+                    </div>
                 </div>
-            </div>
-        
-            <div *ngFor="let category of categories" class="row">
-                <div class="col">
-                    <button type="button" class="list-group-item list-group-item-action rounded-2 shadow" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory == category}" (click)="getSelectedCategory(category)">
-                        <div class="row">
-                            <div class="col-auto">
-                                <i class="bi-list-ul"></i>
-                            </div>
-                            <div class="col">
-                                {{ category.name }}
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                <div class="col-auto">
-                    <button type="button" class="btn btn shadow" data-bs-dismiss="offcanvas" [ngClass]="{'btn-danger': category.taskCount == 0, 'btn-outline-secondary': category.taskCount > 0}" (click)="deleteCategory(category)" [disabled]="category.taskCount > 0"><i class="bi-x-lg"></i></button>
-                </div>
-            </div>
+            </button>
         </div>
 
     </div>

@@ -21,7 +21,6 @@ export class TaskCategorySelectionComponent {
 
   ngOnInit() {
     this.getSelectedCategory(null);
-    
   }
 
   getSelectedCategory(cat: any) {
@@ -34,6 +33,7 @@ export class TaskCategorySelectionComponent {
     const data = {
       name: this.category,
       taskCount: 0,
+      taskUnfinishedCount: 0,
       uid: this.user.uid
     }
     this.catService.addTaskCategory(data);

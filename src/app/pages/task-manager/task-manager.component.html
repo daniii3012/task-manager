@@ -12,11 +12,18 @@
 
     <div class="row justify-content-center p-2">
         <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <app-task-add [selectedCategory]="selectedCategory" [user]="user"></app-task-add>
+        </div>
+    </div>
+
+    <div class="row justify-content-center p-2">
+        <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
             <app-task-category-list [unfinishedTasks]="unfinishedTasks" [finishedTasks]="finishedTasks"></app-task-category-list>
         </div>
     </div>
 </div>
 
+<!-- deprecated
 <div class="container pt-2">
     <div class="row justify-content-center p-2">
         <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
@@ -27,3 +34,4 @@
     <app-task-list [user]="user" *ngIf="user"></app-task-list>
 
 </div>
+-->

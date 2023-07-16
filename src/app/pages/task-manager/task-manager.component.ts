@@ -18,6 +18,7 @@ export class TaskManagerComponent {
   finishedTasks: any;
   finishedTaskSubscription: any;
 
+  selectedCategory: any;
   categories: any = [];
   categorySubscription: any;
 
@@ -78,6 +79,7 @@ export class TaskManagerComponent {
   }
 
   getTasksByCategory(cat: any) {
+    this.selectedCategory = cat;
     if (cat == null) {
       this.getAllTasks();
     } else {

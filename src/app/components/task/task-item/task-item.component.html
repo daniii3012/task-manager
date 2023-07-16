@@ -1,34 +1,17 @@
-<div class="card border-0 shadow mb-4">
-    <div class="card-header">
-        <div class="row">
-            <div class="col text-start">
-                <div *ngIf="task.taskCategory; else noTitle">
-                    {{ task.taskCategory }}
-                    <span class="badge text-bg-info" *ngIf="task.status">Finished</span>
-                    <!--<span class="badge text-bg-info" *ngIf="!task.status">Unfinished</span>-->
-                </div>
-                <ng-template #noTitle>
-                    To Do
-                    <span class="badge text-bg-info" *ngIf="task.status">Finished</span>
-                    <!--<span class="badge text-bg-info" *ngIf="!task.status">Unfinished</span>-->
-                </ng-template>
+<div class="card border-0 shadow mb-3">
+    <div class="card-body bg-body-tertiary rounded-2">
+        <div class="row card-text p-1">
+            <div class="col text-light-emphasis">
+                {{ task.taskTitle }}
             </div>
-            <div class="col-auto text-end">
-                <!--
-                <input [(ngModel)]="task.status" class="form-check-input m-0 p-0" style="font-size: 1.8em;" type="checkbox" id="checkboxNoLabel" (change)="changeList($event)">
-                -->
-                
-                <button type="button" class="btn btn-outline-info btn-sm" (click)="updateTask(task, true)" *ngIf="!task.status"><i class="bi-check"></i></button>
-                <button type="button" class="btn btn-info btn-sm" (click)="updateTask(task, false)" *ngIf="task.status"><i class="bi-check2"></i></button>
-                
+            <div class="col-auto">
+                <button type="button" class="btn btn-sm" [ngClass]="{'btn-outline-info': !task.status, 'btn-info': task.status}" (click)="updateTask(task, !task.status)"><i [ngClass]="{'bi-check': !task.status, 'bi-check2': task.status}"></i></button>
             </div>
         </div>
-    </div>
-    <div class="card-body bg-body-tertiary rounded-bottom-1">
-        <p class="card-text">{{ task.taskDescription }}</p>
-        <div class="row card-text">
+        <div class="row card-text p-1">
             <div class="col">
-                <small class="text-body-secondary text-lowercase">{{ task.taskModificationDate.seconds * 1000 | date: 'MMM dd, yyyy. h:mm: a' }}</small>
+                <small *ngIf="task.taskCategory" class="text-body-secondary">{{ task.taskCategory }} &bull; </small>
+                <small class="text-body-secondary text-lowercase">{{ task.taskModificationDate.seconds * 1000 | date: 'dd/mm/yy h:mm a' }}</small>
             </div>
             <div class="col-auto">
                 <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteTask(task)"><i class="bi-x"></i></button>
