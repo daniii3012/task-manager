@@ -5,15 +5,35 @@
         </button>
     </div>
     <div *ngIf="!_selectedCategory" class="col align-self-center fw-bold">
-        To Do
+        All
     </div>
     <div *ngIf="_selectedCategory" class="col align-self-center fw-bold">
         {{ _selectedCategory.name }}
     </div>
     <div *ngIf="_selectedCategory" class="col-auto">
+        <!-- Button trigger delete modal -->
+        <button type="button" class="btn btn-outline-secondary border-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#deleteModal" (click)="getSelectedCategory(_selectedCategory)">
+            <i class="bi-x-lg"></i>
+        </button>
+        <!-- Delete modal -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content rounded-3 border-0 shadow">
+                    <div class="modal-header">
+                        <h3 class="modal-title fs-5" id="deleteModalLabel">Eliminar lista</h3><h3 class="modal-title fs-5 text-lowercase">&nbsp;{{ _selectedCategory.name }}</h3>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body d-grid">
+                        <button type="button" class="btn border-0" data-bs-dismiss="modal" [ngClass]="{'btn-outline-danger': _selectedCategory.taskCount == 0, 'btn-outline-secondary': _selectedCategory.taskCount > 0}" (click)="deleteCategory(_selectedCategory)" [disabled]="_selectedCategory.taskCount > 0"><i class="bi-trash3-fill"></i>&nbsp;Borrar lista</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--
         <button type="button" class="btn border-2 shadow-sm" [ngClass]="{'btn-danger': _selectedCategory.taskCount == 0, 'btn-outline-secondary': _selectedCategory.taskCount > 0}" (click)="deleteCategory(_selectedCategory)" [disabled]="_selectedCategory.taskCount > 0">
             <i class="bi-x-lg"></i>
         </button>
+        -->
     </div>
 </div>
 
@@ -45,7 +65,7 @@
                         <i class="bi-list-task"></i>
                     </div>
                     <div class="col">
-                        To Do
+                        All
                     </div>
                 </div>
             </button>

@@ -9,23 +9,57 @@ import { CategoryService } from 'src/app/services/task/category/category.service
 export class TaskCategorySelectionComponent {
 
   @Input() user: any;
-  @Input() categories: any;
+  //@Input() categories: any;
   @Output() selectedCategory = new EventEmitter;
+
+
+  categories: any = [];
+  categorySubscription: any;
 
   category: any;
   _selectedCategory: any;
 
-  constructor(private catService: CategoryService) {
+  constructor(
+    private catService: CategoryService
+  ) {
 
   }
 
   ngOnInit() {
+    this.getCategoryList();
     this.getSelectedCategory(null);
+  }
+
+  getCategoryList() {
+    if (this.categorySubscription)
+      this.categorySubscription.unsubscribe();
+
+    this.categorySubscription = this.catService.getCategoriesByUser(this.user.uid).subscribe(
+      data => {
+        this.categories = data;
+      }
+    );
   }
 
   getSelectedCategory(cat: any) {
     //console.log(cat);
-    this._selectedCategory = cat;
+    if (cat) {
+      this.catService.getCategoryById(cat.id).then(
+        ref => {
+          const data = {
+            id: ref.id,
+            name: ref.get('name'),
+            taskCount: ref.get('taskCount'),
+            taskUnfinishedCount: ref.get('taskUnfinishedCount'),
+            uid: ref.get('uid')
+          };
+          this._selectedCategory = data;
+        }
+      );      
+    } else {
+      this._selectedCategory = null;
+    }
+    //this._selectedCategory = cat;
     this.selectedCategory.emit(cat)
   }
 

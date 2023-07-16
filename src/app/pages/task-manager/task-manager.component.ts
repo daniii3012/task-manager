@@ -26,15 +26,13 @@ export class TaskManagerComponent {
 
   constructor(
     private authService: AuthService,
-    private taskService: TaskService,
-    private categoryService: CategoryService
+    private taskService: TaskService
   ) {
   }
 
   ngOnInit() {
     this.isLogged();
     this.getUser();
-    this.getCategoryList();
   }
 
   isLogged() {
@@ -45,17 +43,6 @@ export class TaskManagerComponent {
     if (this.isLogged()) {
       this.user = this.authService.getUser();
     }
-  }
-
-  getCategoryList() {
-    if (this.categorySubscription)
-      this.categorySubscription.unsubscribe();
-
-    this.categorySubscription = this.categoryService.getCategoriesByUser(this.user.uid).subscribe(
-      data => {
-        this.categories = data;
-      }
-    );
   }
 
   getAllTasks() {

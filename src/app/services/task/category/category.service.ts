@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where, increment } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where, increment, getDoc } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -40,6 +40,10 @@ export class CategoryService {
 
   deleteTaskCategory(category: any) {
     return deleteDoc(doc(this.firestore, `category/${category.id}`));
+  }
+
+  getCategoryById(catId: any) {
+    return getDoc(doc(this.firestore, 'category', `${catId}`))
   }
 
   getCategoriesByUser(uid: any) {
