@@ -10,6 +10,7 @@ import { TaskService } from 'src/app/services/task/task.service';
 export class TaskItemComponent {
 
   @Input() task: any;
+  @Input() selectedCategory: any;
   //@Output() updateTask = new EventEmitter;
   //@Output() deleteTask = new EventEmitter;
 
@@ -19,12 +20,12 @@ export class TaskItemComponent {
   ) {
   }
 
-  updateTask(task: any, status: boolean) {
+  updateTask(task: any) {
     //this.updateTask.emit(task);
     if (task.catId) {
-      this.categoryService.updateUnfinishedCount(task.catId, !status);
+      this.categoryService.updateUnfinishedCount(task.catId, task.status);
     }
-    this.taskService.updateTask(task, status);
+    this.taskService.updateTaskStatus(task, !task.status);
   }
 
   deleteTask(task: any) {

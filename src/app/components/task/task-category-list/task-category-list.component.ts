@@ -9,6 +9,7 @@ export class TaskCategoryListComponent {
 
   @Input() unfinishedTasks: any;
   @Input() finishedTasks: any;
+  @Input() selectedCategory: any;
 
   ngOnInit() {
   }

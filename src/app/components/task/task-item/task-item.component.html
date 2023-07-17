@@ -1,21 +1,39 @@
 <div class="card border-0 shadow mb-3">
     <div class="card-body bg-body-tertiary rounded-2">
         <div class="row card-text p-1">
-            <div class="col text-light-emphasis">
+            <div class="col text-light-emphasis text-break">
                 {{ task.taskTitle }}
             </div>
-            <div class="col-auto">
+            <div class="col-auto align-self-center">
+                <input [(ngModel)]="task.status" (click)="updateTask(task)" class="form-check-input m-0" type="checkbox" style="font-size: 2em;" [value]="task.status">
+                <!--
                 <button type="button" class="btn btn-sm" [ngClass]="{'btn-outline-info': !task.status, 'btn-info': task.status}" (click)="updateTask(task, !task.status)"><i [ngClass]="{'bi-check': !task.status, 'bi-check2': task.status}"></i></button>
+                -->
             </div>
         </div>
         <div class="row card-text p-1">
             <div class="col">
-                <small *ngIf="task.taskCategory" class="text-body-secondary">{{ task.taskCategory }} &bull; </small>
-                <small class="text-body-secondary text-lowercase">{{ task.taskModificationDate.seconds * 1000 | date: 'dd/mm/yy h:mm a' }}</small>
+                <small *ngIf="task.taskCategory" class="text-body-secondary">{{ task.taskCategory }}</small>
+                <!--
+                <small class="text-body-secondary text-lowercase"> &bull; {{ task.taskModificationDate.seconds * 1000 | date: 'dd/mm/yy h:mm a' }}</small>
+                -->
             </div>
             <div class="col-auto">
+                <!-- Button trigger task update modal -->
+                <button *ngIf="selectedCategory" type="button" class="btn btn-outline-secondary rounded-2 btn-sm" data-bs-toggle="modal" attr.data-bs-target="#updateTaskModal{{ task.id }}">
+                    <i class="bi-info"></i>
+                </button>
+                <!-- Button trigger task info modal -->
+                <button *ngIf="!selectedCategory" type="button" class="btn btn-outline-secondary rounded-2 btn-sm" data-bs-toggle="modal" attr.data-bs-target="#infoTaskModal{{ task.id }}">
+                    <i class="bi-info"></i>
+                </button>
+                <!--
                 <button type="button" class="btn btn-outline-danger btn-sm" (click)="deleteTask(task)"><i class="bi-x"></i></button>
+                -->
             </div>
         </div>
     </div>
 </div>
+
+<app-task-item-update-modal [task]="task" (_deleteTask)="deleteTask($event)"></app-task-item-update-modal>
+<app-task-item-info-modal [task]="task"></app-task-item-info-modal>

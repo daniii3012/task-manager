@@ -7,15 +7,15 @@ import { Observable } from 'rxjs';
 })
 export class TaskService {
 
-  constructor(private firestore: Firestore) { 
+  constructor(private firestore: Firestore) {
   }
 
   addTask(task: any) {
     return addDoc(collection(this.firestore, 'task'), task);
   }
 
-  updateTask(task: any, status: boolean) {
-    if(!status) {
+  updateTaskStatus(task: any, status: boolean) {
+    if (!status) {
       return updateDoc(doc(this.firestore, `task/${task.id}`), {
         taskModificationDate: new Date(),
         status: status
@@ -25,7 +25,18 @@ export class TaskService {
         status: status
       });
     }
-    
+
+  }
+
+  updateTask(task: any) {
+    return updateDoc(doc(this.firestore, `task/${task.id}`), {
+      taskTitle: task.taskTitle,
+      taskDescription: task.taskDescription,
+      //taskCategory: this.selectedCategory.name,
+      //catId: this.selectedCategory.id,
+      taskModificationDate: new Date(),
+      //status: false,
+    });
   }
 
   deleteTask(task: any) {

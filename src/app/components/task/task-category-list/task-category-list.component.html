@@ -1,7 +1,7 @@
 <div *ngIf="unfinishedTasks">
-    <app-task-item *ngFor="let task of unfinishedTasks" [task]="task"></app-task-item>
+    <app-task-item *ngFor="let task of unfinishedTasks" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
 </div>
 
 <div *ngIf="finishedTasks">
-    <app-task-item *ngFor="let task of finishedTasks" [task]="task"></app-task-item>
+    <app-task-item *ngFor="let task of finishedTasks" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
 </div>

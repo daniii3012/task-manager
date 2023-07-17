@@ -16,7 +16,7 @@ export class TaskCategorySelectionComponent {
   categories: any = [];
   categorySubscription: any;
 
-  category: any;
+  //category: any;
   _selectedCategory: any;
 
   constructor(
@@ -26,19 +26,8 @@ export class TaskCategorySelectionComponent {
   }
 
   ngOnInit() {
-    this.getCategoryList();
+    //this.getCategoryList();
     this.getSelectedCategory(null);
-  }
-
-  getCategoryList() {
-    if (this.categorySubscription)
-      this.categorySubscription.unsubscribe();
-
-    this.categorySubscription = this.catService.getCategoriesByUser(this.user.uid).subscribe(
-      data => {
-        this.categories = data;
-      }
-    );
   }
 
   getSelectedCategory(cat: any) {
@@ -46,6 +35,9 @@ export class TaskCategorySelectionComponent {
     if (cat) {
       this.catService.getCategoryById(cat.id).then(
         ref => {
+          this._selectedCategory = ref.data();
+          this._selectedCategory.id = ref.id;
+          /*
           const data = {
             id: ref.id,
             name: ref.get('name'),
@@ -54,24 +46,25 @@ export class TaskCategorySelectionComponent {
             uid: ref.get('uid')
           };
           this._selectedCategory = data;
+          */
         }
-      );      
+      );  
     } else {
-      this._selectedCategory = null;
+      this._selectedCategory = cat;
     }
-    //this._selectedCategory = cat;
+    //this._selectedCategory = local;
     this.selectedCategory.emit(cat)
   }
 
-  addCategory() {
+  addCategory(cat: any) {
     const data = {
-      name: this.category,
+      name: cat,
       taskCount: 0,
       taskUnfinishedCount: 0,
       uid: this.user.uid
     }
     this.catService.addTaskCategory(data);
-    this.category = null;
+    //this.category = null;
   }
 
   deleteCategory(category: any) {

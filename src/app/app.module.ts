@@ -21,6 +21,9 @@ import { TaskCategoryListComponent } from './components/task/task-category-list/
 import { TaskCategorySelectionComponent } from './components/task/task-category-selection/task-category-selection.component';
 import { TaskItemTemplateComponent } from './components/task/task-item/task-item-template/task-item-template.component';
 import { TaskAddComponent } from './components/task/task-add/task-add.component';
+import { TaskItemInfoModalComponent } from './components/task/task-item/task-item-info-modal/task-item-info-modal.component';
+import { TaskItemUpdateModalComponent } from './components/task/task-item/task-item-update-modal/task-item-update-modal.component';
+import { TaskListOffcanvasComponent } from './components/task/task-list-offcanvas/task-list-offcanvas.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +39,10 @@ import { TaskAddComponent } from './components/task/task-add/task-add.component'
     TaskCategoryListComponent,
     TaskCategorySelectionComponent,
     TaskItemTemplateComponent,
-    TaskAddComponent
+    TaskAddComponent,
+    TaskItemInfoModalComponent,
+    TaskItemUpdateModalComponent,
+    TaskListOffcanvasComponent
   ],
   imports: [
     BrowserModule,

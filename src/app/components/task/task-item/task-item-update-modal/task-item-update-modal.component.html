@@ -1,0 +1,35 @@
+<!-- Update modal -->
+<div class="modal fade" id="updateTaskModal{{ _task.id }}" tabindex="-1" aria-labelledby="updateTaskModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content rounded-3 border-0 shadow">
+            <div class="modal-header border-bottom-0">
+                <h3 class="modal-title fs-5 text-truncate" id="updateTaskModalLabel">Task info</h3>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="input-group rounded-2 shadow-sm">
+                        <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon1"><i class="bi-journal-text"></i></span>
+                        <textarea [(ngModel)]="_task.taskTitle" (input)="autoSizeTextareaTitle()" (focus)="autoSizeTextareaTitle()" name="taskTitle" maxlength="250" style="height: 5em" class="form-control border-0" id="taskTitleEdit{{ _task.id }}"></textarea>
+                    </div>
+                </form>
+                <form>
+                    <div class="input-group rounded-2 shadow-sm my-1">
+                        <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon2"><i class="bi-sticky"></i></span>
+                        <div class="form-floating">
+                            <textarea [(ngModel)]="_task.taskDescription" (input)="autoSizeTextareaDescription()" (focus)="autoSizeTextareaDescription()" name="taskTitle" maxlength="750" style="height: 15em" class="form-control border-0" id="taskDescriptionEdit{{ _task.id }}" placeholder="Add notes"></textarea>
+                            <label for="taskDescriptionEdit{{ _task.id }}">Notes</label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer border-top-0 my-1">
+                <button type="button" class="btn btn-outline-secondary border-0 shadow-sm col" data-bs-dismiss="modal"><i class="bi-x-lg"></i>&nbsp;Descartar</button>
+                <button type="button" class="btn btn-outline-primary border-0 shadow-sm col" data-bs-dismiss="modal" (click)="updateTask(_task)" [disabled]="(task.taskTitle == _task.taskTitle) && (task.taskDescription == _task.taskDescription)"><i class="bi-pencil-fill"></i>&nbsp;Actualizar</button>
+            </div>
+            <div class="modal-footer border-top-0">
+                <button type="button" class="btn btn-outline-danger border-0 shadow-sm col" data-bs-dismiss="modal" (click)="deleteTask(_task)"><i class="bi-trash3-fill"></i>&nbsp;Borrar tarea</button>
+            </div>
+        </div>
+    </div>
+</div>
