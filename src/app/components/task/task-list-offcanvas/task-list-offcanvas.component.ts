@@ -1,6 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CategoryService } from 'src/app/services/task/category/category.service';
+import { TaskService } from 'src/app/services/task/task.service';
 
 @Component({
   selector: 'app-task-list-offcanvas',
@@ -19,8 +20,11 @@ export class TaskListOffcanvasComponent {
   categories: any = [];
   categorySubscription: any;
 
+  allUnfinishedTask: any;
+
   constructor(
     private authService: AuthService,
+    private taskService: TaskService,
     private catService: CategoryService
   ) {
 
@@ -37,6 +41,7 @@ export class TaskListOffcanvasComponent {
     this.categorySubscription = this.catService.getCategoriesByUser(this.user.uid).subscribe(
       data => {
         this.categories = data;
+        this.getAllUnfinishedTaskCount();
       }
     );
   }
@@ -48,6 +53,14 @@ export class TaskListOffcanvasComponent {
 
   getSelectedCategory(cat: any) {
     this._getSelectedCategory.emit(cat);
+  }
+
+  getAllUnfinishedTaskCount() {
+    this.taskService.getAllUnfinishedTasksCount().then(
+      data => {
+        this.allUnfinishedTask = data.data().count;
+      }
+    );
   }
 
   logout() {

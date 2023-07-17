@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CategoryService } from 'src/app/services/task/category/category.service';
+import { TaskService } from 'src/app/services/task/task.service';
 
 @Component({
   selector: 'app-task-category-selection',
@@ -19,7 +20,10 @@ export class TaskCategorySelectionComponent {
   //category: any;
   _selectedCategory: any;
 
+  unfinishedTaskCount: any;
+
   constructor(
+    //private taskService: TaskService,
     private catService: CategoryService
   ) {
 
@@ -32,27 +36,21 @@ export class TaskCategorySelectionComponent {
 
   getSelectedCategory(cat: any) {
     //console.log(cat);
+
     if (cat) {
       this.catService.getCategoryById(cat.id).then(
         ref => {
           this._selectedCategory = ref.data();
           this._selectedCategory.id = ref.id;
-          /*
-          const data = {
-            id: ref.id,
-            name: ref.get('name'),
-            taskCount: ref.get('taskCount'),
-            taskUnfinishedCount: ref.get('taskUnfinishedCount'),
-            uid: ref.get('uid')
-          };
-          this._selectedCategory = data;
-          */
         }
-      );  
+      );
+      //this.getUnfinishedTaskCount(cat.id);
     } else {
       this._selectedCategory = cat;
+      //this.getUnfinishedTaskCount(null);
     }
     //this._selectedCategory = local;
+
     this.selectedCategory.emit(cat)
   }
 
@@ -71,5 +69,23 @@ export class TaskCategorySelectionComponent {
     this.getSelectedCategory(null);
     this.catService.deleteTaskCategory(category);
   }
-
+  /*
+  getUnfinishedTaskCount(selectedCategory: any) {
+    //console.log(selectedCategory);
+    
+    if(selectedCategory) {
+      this.taskService.getUnfinishedTaskByCategoryCount(selectedCategory).then(
+        data => {
+          this.unfinishedTaskCount = data.data().count;
+        }
+      );
+    } else {
+      this.taskService.getAllUnfinishedTasksCount().then(
+        data => {
+          this.unfinishedTaskCount = data.data().count;
+        }
+      );
+    }
+  }
+  */
 }

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, collectionData, deleteDoc, doc, getCountFromServer, orderBy, query, updateDoc, where } from '@angular/fire/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -50,7 +50,7 @@ export class TaskService {
         where('status', '==', status),
         where('uid', '==', uid)), {
       idField: 'id'
-    }) as Observable<any[]>
+    }) as Observable<any[]>;
   }
 
   getTaskByCategoryAndStatus(category: any, status: boolean, uid: any) {
@@ -61,7 +61,20 @@ export class TaskService {
         where('status', '==', status),
         where('uid', '==', uid)), {
       idField: 'id'
-    }) as Observable<any[]>
+    }) as Observable<any[]>;
+  }
+
+  getAllUnfinishedTasksCount() {
+    return getCountFromServer(
+      query(collection(this.firestore, 'task'),
+      where('status', '==', false)));
+  }
+
+  getUnfinishedTaskByCategoryCount(catId: any) {
+    return getCountFromServer(
+      query(collection(this.firestore, 'task'),
+      where('status', '==', false),
+      where('catId', '==', catId)));
   }
 
   // deprecated

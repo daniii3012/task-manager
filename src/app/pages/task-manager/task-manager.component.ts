@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { TaskCategorySelectionComponent } from 'src/app/components/task/task-category-selection/task-category-selection.component';
 import { AuthService } from 'src/app/services/auth/auth.service';
 import { CategoryService } from 'src/app/services/task/category/category.service';
 import { TaskService } from 'src/app/services/task/task.service';

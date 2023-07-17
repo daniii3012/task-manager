@@ -11,13 +11,18 @@
     <div *ngIf="_selectedCategory" class="col align-self-center fw-bold text-truncate">
         {{ _selectedCategory.name }}
     </div>
+    <!--
+    <div *ngIf="unfinishedTaskCount > 0" class="col-auto align-self-center">
+        <span class="badge bg-dark-subtle text-dark-emphasis">{{ unfinishedTaskCount }}</span>
+    </div>
+    -->
     <div *ngIf="_selectedCategory" class="col-auto">
         <!-- Button trigger info modal -->
         <button type="button" class="btn btn-outline-secondary border-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#infoCatModal" (click)="getSelectedCategory(_selectedCategory)">
             <i class="bi-info"></i>
         </button>
         <!-- Info modal -->
-        <div class="modal fade" id="infoCatModal" tabindex="-1" aria-labelledby="infoCatModalLabel" aria-hidden="true">
+        <div class="modal fade" id="infoCatModal" data-bs-backdrop="false" tabindex="-1" aria-labelledby="infoCatModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content rounded-3 border-0 shadow">
                     <div class="modal-header">
