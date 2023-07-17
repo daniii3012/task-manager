@@ -44,6 +44,7 @@ export class AuthService {
     })).then(
       res => {
         //console.log('Successfully logged', res);
+        localStorage.setItem('user', JSON.stringify(res.user));
         this.signInRedirect();
       }
     ).catch(err => console.error(err));
@@ -53,6 +54,7 @@ export class AuthService {
   signOutApp() {
     signOut(this.auth).then(
       () => {
+        localStorage.setItem('user', 'null');
         this.signOutRedirect();
       }
     ).catch(err => console.error(err));
@@ -63,7 +65,7 @@ export class AuthService {
   }
 
   signOutRedirect() {
-    this.router.navigate(['/home']);
+    this.router.navigate(['/login']);
   }
 
   getUser() {

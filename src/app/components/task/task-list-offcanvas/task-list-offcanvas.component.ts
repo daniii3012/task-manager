@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { AuthService } from 'src/app/services/auth/auth.service';
 import { CategoryService } from 'src/app/services/task/category/category.service';
 
 @Component({
@@ -19,6 +20,7 @@ export class TaskListOffcanvasComponent {
   categorySubscription: any;
 
   constructor(
+    private authService: AuthService,
     private catService: CategoryService
   ) {
 
@@ -46,6 +48,10 @@ export class TaskListOffcanvasComponent {
 
   getSelectedCategory(cat: any) {
     this._getSelectedCategory.emit(cat);
+  }
+
+  logout() {
+    this.authService.signOutApp();
   }
 
 }

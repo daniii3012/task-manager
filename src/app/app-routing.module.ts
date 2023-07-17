@@ -7,11 +7,11 @@ import { TaskManagerComponent } from './pages/task-manager/task-manager.componen
 import { authGuard } from './guards/auth/auth.guard';
 
 const routes: Routes = [
-  { path: 'home', component: HomeComponent },
+  //{ path: 'home', component: HomeComponent },
   { path: 'login', component: LoginComponent },
   { path: 'tasks', component: TaskManagerComponent, canActivate: [authGuard] },
-  { path: '', pathMatch: 'full', redirectTo: 'home' },
-  { path: '**', pathMatch: 'full', redirectTo: 'home' }
+  { path: '', pathMatch: 'full', redirectTo: 'tasks' },
+  { path: '**', pathMatch: 'full', redirectTo: 'tasks' }
 ];
 
 @NgModule({
