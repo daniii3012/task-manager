@@ -1,5 +1,5 @@
-<div class="container sticky-top pt-2">
-    <div class="row justify-content-center p-2">
+<div class="container sticky-top rounded-bottom bg-body">
+    <div class="row justify-content-center p-2 pt-4">
         <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
             <app-task-category-selection [user]="user" (selectedCategory)="getTasksByCategory($event)"></app-task-category-selection>
         </div>
@@ -17,8 +17,7 @@
         </div>
     </div>
 </div>
-
-<div class="container">
+<div class="container pt-2">
     <div class="row justify-content-center p-2">
         <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
             <app-task-category-list [unfinishedTasks]="unfinishedTasks" [finishedTasks]="finishedTasks" [selectedCategory]="selectedCategory"></app-task-category-list>

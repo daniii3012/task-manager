@@ -14,6 +14,8 @@ export class TaskItemComponent {
   //@Output() updateTask = new EventEmitter;
   //@Output() deleteTask = new EventEmitter;
 
+  _showNotes: boolean = false;
+
   constructor(
     private taskService: TaskService,
     private categoryService: CategoryService
@@ -26,17 +28,35 @@ export class TaskItemComponent {
       this.categoryService.updateUnfinishedCount(task.catId, task.status);
     }
     this.taskService.updateTaskStatus(task, !task.status);
+
+    if(task.status) {
+      //this.scrollToTop();
+    }
   }
 
   deleteTask(task: any) {
     //this.deleteTask.emit(task);
     if (task.catId) {
-      if(!task.status) {
+      if (!task.status) {
         this.categoryService.updateUnfinishedCount(task.catId, false);
       }
       this.categoryService.updateTaskCount(task.catId, false);
     }
     this.taskService.deleteTask(task);
+
+    //this.scrollToTop();
+  }
+
+  showNotes() {
+    this._showNotes = !this._showNotes;
+  }
+
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
 }

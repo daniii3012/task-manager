@@ -10,7 +10,7 @@
           </div>
         </form>
       </div>
-      <div class="col-auto">
+      <div *ngIf="selectedCategory" class="col-auto">
         <button type="button" class="btn btn-secondary border-0 shadow-sm" (click)="addTask()" [disabled]="!taskTitle || selectedCategory == null"><i class="bi-plus"></i></button>
       </div>
     </div>

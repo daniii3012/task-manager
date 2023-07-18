@@ -57,19 +57,21 @@ export class TaskService {
     return collectionData(
       query(collection(this.firestore, 'task'),
         orderBy('taskModificationDate', 'desc'),
-        where('taskCategory', '==', category.name),
+        where('catId', '==', category.id), //updated from taskCategory to catId
         where('status', '==', status),
         where('uid', '==', uid)), {
       idField: 'id'
     }) as Observable<any[]>;
   }
 
-  getAllUnfinishedTasksCount() {
+  getAllUnfinishedTasksCount(uid: any) {
     return getCountFromServer(
       query(collection(this.firestore, 'task'),
-      where('status', '==', false)));
+      where('status', '==', false),
+      where('uid', '==', uid)));
   }
 
+  // sin id de usuario
   getUnfinishedTaskByCategoryCount(catId: any) {
     return getCountFromServer(
       query(collection(this.firestore, 'task'),

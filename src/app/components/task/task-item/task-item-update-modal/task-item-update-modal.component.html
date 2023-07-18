@@ -10,15 +10,15 @@
                 <form>
                     <div class="input-group rounded-2 shadow-sm">
                         <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon1"><i class="bi-journal-text"></i></span>
-                        <textarea [(ngModel)]="_task.taskTitle" (input)="autoSizeTextareaTitle()" (focus)="autoSizeTextareaTitle()" name="taskTitle" maxlength="250" style="height: 5em" class="form-control border-0" id="taskTitleEdit{{ _task.id }}"></textarea>
+                        <textarea [(ngModel)]="_task.taskTitle" (input)="autoSizeTextareaTitle()" (focus)="autoSizeTextareaTitle()" name="taskTitle" maxlength="250" style="height: 5em" class="form-control bg-body-tertiary border-0" id="taskTitleEdit{{ _task.id }}"></textarea>
                     </div>
                 </form>
                 <form>
                     <div class="input-group rounded-2 shadow-sm my-1">
                         <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon2"><i class="bi-sticky"></i></span>
                         <div class="form-floating">
-                            <textarea [(ngModel)]="_task.taskDescription" (input)="autoSizeTextareaDescription()" (focus)="autoSizeTextareaDescription()" name="taskTitle" maxlength="750" style="height: 15em" class="form-control border-0" id="taskDescriptionEdit{{ _task.id }}" placeholder="Add notes"></textarea>
-                            <label for="taskDescriptionEdit{{ _task.id }}">Notes</label>
+                            <textarea [(ngModel)]="_task.taskDescription" (input)="autoSizeTextareaDescription()" (focus)="autoSizeTextareaDescription()" name="taskTitle" maxlength="750" style="height: 15em" class="form-control bg-body-tertiary border-0" id="taskDescriptionEdit{{ _task.id }}" placeholder="Add notes"></textarea>
+                            <label for="taskDescriptionEdit{{ _task.id }}">Notas</label>
                         </div>
                     </div>
                 </form>

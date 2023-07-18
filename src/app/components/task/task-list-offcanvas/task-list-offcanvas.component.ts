@@ -56,7 +56,7 @@ export class TaskListOffcanvasComponent {
   }
 
   getAllUnfinishedTaskCount() {
-    this.taskService.getAllUnfinishedTasksCount().then(
+    this.taskService.getAllUnfinishedTasksCount(this.user.uid).then(
       data => {
         this.allUnfinishedTask = data.data().count;
       }

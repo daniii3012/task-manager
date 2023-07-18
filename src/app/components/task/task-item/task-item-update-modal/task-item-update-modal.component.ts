@@ -23,6 +23,10 @@ export class TaskItemUpdateModalComponent {
 
   updateTask(task: any) {
     this.taskService.updateTask(task);
+
+    if(!task.status) {
+      //this.scrollToTop();
+    }
   }
 
   deleteTask(task: any) {
@@ -41,6 +45,14 @@ export class TaskItemUpdateModalComponent {
 
     doc.style.height = "0px";
     doc.style.height = (doc.scrollHeight + 25) + "px";
+  }
+
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
   }
 
 }
