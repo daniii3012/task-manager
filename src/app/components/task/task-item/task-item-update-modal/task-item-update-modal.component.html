@@ -35,11 +35,11 @@
                     <small class="text-body-secondary">Última modificación: {{ _task.taskModificationDate.seconds * 1000 | date: 'dd/MM/yy, h:mm a' }}</small>
                 </div>
             </div>
-            <div class="modal-footer border-top-0 my-1">
+            <div class="modal-footer border-top-0 mb-1">
                 <button type="button" class="btn btn-outline-secondary border-0 shadow-sm col" data-bs-dismiss="modal"><i class="bi-box-arrow-in-left"></i>&nbsp;Descartar</button>
                 <button type="button" class="btn btn-outline-primary border-0 shadow-sm col" data-bs-dismiss="modal" (click)="updateTask(_task)" [disabled]="(task.taskTitle == _task.taskTitle) && (task.taskDescription == _task.taskDescription) && (_task.taskDueDate == taskDueDate)"><i class="bi-pencil-fill"></i>&nbsp;Actualizar</button>
             </div>
-            <div class="modal-footer border-top-0">
+            <div class="modal-footer">
                 <button type="button" class="btn btn-outline-danger border-0 shadow-sm col" data-bs-dismiss="modal" (click)="deleteTask(_task)"><i class="bi-trash3-fill"></i>&nbsp;Borrar tarea</button>
             </div>
         </div>
