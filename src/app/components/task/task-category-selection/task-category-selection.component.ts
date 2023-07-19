@@ -10,27 +10,22 @@ import { TaskService } from 'src/app/services/task/task.service';
 export class TaskCategorySelectionComponent {
 
   @Input() user: any;
-  //@Input() categories: any;
+  @Output() categories = new EventEmitter;
   @Output() selectedCategory = new EventEmitter;
 
+  _categories: any;
 
-  categories: any = [];
-  categorySubscription: any;
-
-  //category: any;
   _selectedCategory: any;
 
   unfinishedTaskCount: any;
 
   constructor(
-    //private taskService: TaskService,
     private catService: CategoryService
   ) {
 
   }
 
   ngOnInit() {
-    //this.getCategoryList();
     this.getSelectedCategory(null);
   }
 
@@ -44,27 +39,18 @@ export class TaskCategorySelectionComponent {
           this._selectedCategory.id = ref.id;
         }
       );
-      //this.getUnfinishedTaskCount(cat.id);
     } else {
       this._selectedCategory = cat;
-      //this.getUnfinishedTaskCount(null);
     }
-    //this._selectedCategory = local;
 
     this.scrollToTop();
 
     this.selectedCategory.emit(cat)
   }
 
-  getSelectedCategoryInfo(cat:any) {
-    if (cat) {
-      this.catService.getCategoryById(cat.id).then(
-        ref => {
-          this._selectedCategory = ref.data();
-          this._selectedCategory.id = ref.id;
-        }
-      );
-    }
+  getCategories(cat: any) {
+    this._categories = cat;
+    this.categories.emit(cat);
   }
 
   addCategory(cat: any) {
@@ -82,25 +68,6 @@ export class TaskCategorySelectionComponent {
     this.getSelectedCategory(null);
     this.catService.deleteTaskCategory(category);
   }
-  /*
-  getUnfinishedTaskCount(selectedCategory: any) {
-    //console.log(selectedCategory);
-    
-    if(selectedCategory) {
-      this.taskService.getUnfinishedTaskByCategoryCount(selectedCategory).then(
-        data => {
-          this.unfinishedTaskCount = data.data().count;
-        }
-      );
-    } else {
-      this.taskService.getAllUnfinishedTasksCount().then(
-        data => {
-          this.unfinishedTaskCount = data.data().count;
-        }
-      );
-    }
-  }
-  */
 
   scrollToTop() {
     window.scroll({

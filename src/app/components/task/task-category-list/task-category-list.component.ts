@@ -7,9 +7,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 })
 export class TaskCategoryListComponent {
 
-  @Input() unfinishedTasks: any;
-  @Input() finishedTasks: any;
+  @Input() tasks: any;
+  //@Input() unfinishedTasks: any;
+  //@Input() finishedTasks: any;
   @Input() selectedCategory: any;
+  @Input() categories: any;
 
   arrowDirection: boolean = false;
 
@@ -18,7 +20,6 @@ export class TaskCategoryListComponent {
 
   changeArrow(e: any) {
     this.arrowDirection = e.target.attributes['aria-expanded'].value == 'true';
-    
   }
 
 }

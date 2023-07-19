@@ -1,13 +1,33 @@
-<div *ngIf="unfinishedTasks">
-    <app-task-item *ngFor="let task of unfinishedTasks" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
+<div *ngFor="let task of tasks">
+    <div *ngIf="selectedCategory == null">
+        <app-task-item *ngIf="!task.status" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
+    </div>
+
+    <div *ngIf="selectedCategory != null">
+        <app-task-item *ngIf="!task.status && (selectedCategory.id == task.catId)" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
+    </div>
 </div>
 
-<button *ngIf="finishedTasks?.length != 0" (click)="changeArrow($event)" class="btn bg-secondary-subtle text-dark-emphasis shadow mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFinished" aria-expanded="false" aria-controls="collapseFinished">
+<button *ngIf="selectedCategory == null" (click)="changeArrow($event)" class="btn bg-secondary-subtle text-dark-emphasis shadow mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFinished" aria-expanded="false" aria-controls="collapseFinished">
     <i class="" [ngClass]="{'bi-caret-right-fill': !arrowDirection, 'bi-caret-down-fill': arrowDirection}"></i>
     Tareas finalizadas
-    <span class="badge bg-body text-dark-emphasis">{{ finishedTasks?.length }}</span>
 </button>
+<div *ngFor="let category of categories">
+    <button *ngIf="(selectedCategory != null && selectedCategory.id == category.id) && category.taskCount - category.taskUnfinishedCount" (click)="changeArrow($event)" class="btn bg-secondary-subtle text-dark-emphasis shadow mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFinished" aria-expanded="false" aria-controls="collapseFinished">
+        <i class="" [ngClass]="{'bi-caret-right-fill': !arrowDirection, 'bi-caret-down-fill': arrowDirection}"></i>
+        Tareas finalizadas
+        <span class="badge bg-body text-dark-emphasis">{{ category.taskCount - category.taskUnfinishedCount }}</span>
+    </button>
+</div>
 
-<div *ngIf="finishedTasks" class="collapse" id="collapseFinished">
-    <app-task-item *ngFor="let task of finishedTasks" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
+<div class="collapse" id="collapseFinished">
+    <div *ngFor="let task of tasks">
+        <div *ngIf="selectedCategory == null">
+            <app-task-item *ngIf="task.status" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
+        </div>
+    
+        <div *ngIf="selectedCategory != null">
+            <app-task-item *ngIf="task.status && (selectedCategory.id == task.catId)" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
+        </div>
+    </div>
 </div>

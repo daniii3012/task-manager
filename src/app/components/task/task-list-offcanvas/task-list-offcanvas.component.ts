@@ -14,6 +14,7 @@ export class TaskListOffcanvasComponent {
   @Input() _selectedCategory: any;
   @Output() _addCategory = new EventEmitter;
   @Output() _getSelectedCategory = new EventEmitter;
+  @Output() _categories = new EventEmitter;
 
   category: any;
 
@@ -41,6 +42,7 @@ export class TaskListOffcanvasComponent {
     this.categorySubscription = this.catService.getCategoriesByUser(this.user.uid).subscribe(
       data => {
         this.categories = data;
+        this._categories.emit(this.categories);
         //this.getAllUnfinishedTaskCount(); aumenta al doble la cantidad de operaciones de lectura a documentos
       }
     );

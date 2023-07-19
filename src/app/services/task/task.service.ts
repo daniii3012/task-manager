@@ -72,17 +72,6 @@ export class TaskService {
       where('uid', '==', uid)));
   }
 
-  /* sin id de usuario
-  getUnfinishedTaskByCategoryCount(catId: any) {
-    return getCountFromServer(
-      query(collection(this.firestore, 'task'),
-      where('status', '==', false),
-      where('catId', '==', catId)));
-  }
-  */
-
-  // deprecated
-
   getTaskByUser(uid: any) {
     return collectionData(
       query(collection(this.firestore, 'task'),
@@ -90,8 +79,9 @@ export class TaskService {
         where('uid', '==', uid)), {
       idField: 'id'
     }) as Observable<any[]>
-  }
-
+  }  
+  
+  // deprecated, used in task manager getAllTasks method
   getTaskByStatus(status: boolean, uid: any) {
     return collectionData(
       query(collection(this.firestore, 'task'),
@@ -100,6 +90,16 @@ export class TaskService {
         where('uid', '==', uid)), {
       idField: 'id'
     }) as Observable<any[]>
+  }
+
+  // deprecated
+
+  /* sin id de usuario
+  getUnfinishedTaskByCategoryCount(catId: any) {
+    return getCountFromServer(
+      query(collection(this.firestore, 'task'),
+      where('status', '==', false),
+      where('catId', '==', catId)));
   }
 
   getTaskByCategory(category: any, uid: any) {
@@ -111,6 +111,7 @@ export class TaskService {
       idField: 'id'
     }) as Observable<any[]>
   }
+  */
 
 }
 

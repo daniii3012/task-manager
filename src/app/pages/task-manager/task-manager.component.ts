@@ -14,13 +14,21 @@ export class TaskManagerComponent {
 
   user: any;
 
+  tasks: any;
+  taskSubscription: any;
+
+  //
+  // deprecated for bad optimization
+  //
+  /* 
   unfinishedTasks: any;
   unfinishedTaskSubscription: any;
   finishedTasks: any;
   finishedTaskSubscription: any;
+  */
 
   selectedCategory: any;
-  categories: any = [];
+  categories: any;
   categorySubscription: any;
 
   finished: boolean = true;
@@ -34,6 +42,7 @@ export class TaskManagerComponent {
   ngOnInit() {
     this.isLogged();
     this.getUser();
+    this.getAllTasks();
   }
 
   isLogged() {
@@ -47,6 +56,21 @@ export class TaskManagerComponent {
   }
 
   getAllTasks() {
+    if (!this.taskSubscription) {
+      this.taskSubscription = this.taskService.getTaskByUser(this.user.uid).subscribe(
+        data => {
+          this.tasks = data;
+          console.log(data);
+          console.log(this.taskSubscription);
+        }
+      );
+    }
+        
+
+    //
+    // deprecated for bad optimization
+    //
+    /*
     if (this.unfinishedTaskSubscription)
       this.unfinishedTaskSubscription.unsubscribe();
 
@@ -64,8 +88,21 @@ export class TaskManagerComponent {
         this.finishedTasks = data;
       }
     );
+    */
   }
 
+  getCategories(cat: any) {
+    this.categories = cat;
+  }
+
+  getSelectedCategory(cat: any) {
+    this.selectedCategory = cat;
+  }
+
+  //
+  // deprecated for bad optimization
+  //
+  /* deprecated for bad optimization
   getTasksByCategory(cat: any) {
     this.selectedCategory = cat;
     if (cat == null) {
@@ -90,5 +127,6 @@ export class TaskManagerComponent {
       );
     }
   }
+  */
 
 }
