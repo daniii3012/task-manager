@@ -14,14 +14,11 @@ import { HomeComponent } from './pages/home/home.component';
 import { TaskManagerComponent } from './pages/task-manager/task-manager.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RecentTasksComponent } from './components/home/recent-tasks/recent-tasks.component';
-import { TaskListComponent } from './components/task/task-list/task-list.component';
 import { TaskItemComponent } from './components/task/task-item/task-item.component';
-import { TaskFormComponent } from './components/task/task-form/task-form.component';
 import { TaskCategoryListComponent } from './components/task/task-category-list/task-category-list.component';
 import { TaskCategorySelectionComponent } from './components/task/task-category-selection/task-category-selection.component';
 import { TaskItemTemplateComponent } from './components/task/task-item/task-item-template/task-item-template.component';
 import { TaskAddComponent } from './components/task/task-add/task-add.component';
-import { TaskItemInfoModalComponent } from './components/task/task-item/task-item-info-modal/task-item-info-modal.component';
 import { TaskItemUpdateModalComponent } from './components/task/task-item/task-item-update-modal/task-item-update-modal.component';
 import { TaskListOffcanvasComponent } from './components/task/task-list-offcanvas/task-list-offcanvas.component';
 
@@ -33,14 +30,11 @@ import { TaskListOffcanvasComponent } from './components/task/task-list-offcanva
     TaskManagerComponent,
     LoginComponent,
     RecentTasksComponent,
-    TaskListComponent,
     TaskItemComponent,
-    TaskFormComponent,
     TaskCategoryListComponent,
     TaskCategorySelectionComponent,
     TaskItemTemplateComponent,
     TaskAddComponent,
-    TaskItemInfoModalComponent,
     TaskItemUpdateModalComponent,
     TaskListOffcanvasComponent
   ],
