@@ -12,6 +12,8 @@ export class TaskItemUpdateModalComponent {
   @Output() _deleteTask = new EventEmitter;
 
   _task: any;
+  currentDate: any;
+  taskDueDate: any;
 
   constructor(private taskService: TaskService) {
 
@@ -19,12 +21,18 @@ export class TaskItemUpdateModalComponent {
 
   ngOnInit() {
     this._task = Object.assign({}, this.task);
+    this.getCurrentDate();
+    this.getTaskDueDate();
   }
 
   updateTask(task: any) {
+    if (this.taskDueDate) {
+      const [year, month, day] = this.taskDueDate.split('-');
+      task.taskDueDate = new Date(new Date(+year, month - 1, day));
+    }
     this.taskService.updateTask(task);
 
-    if(!task.status) {
+    if (!task.status) {
       //this.scrollToTop();
     }
   }
@@ -45,6 +53,24 @@ export class TaskItemUpdateModalComponent {
 
     doc.style.height = "0px";
     doc.style.height = (doc.scrollHeight + 25) + "px";
+  }
+
+  getTaskDueDate() {
+    if (this._task.taskDueDate) {
+      const date = new Date(this._task.taskDueDate.seconds * 1000);
+      this.taskDueDate = new Date(date).toISOString().split('T')[0];
+
+      this._task.taskDueDate = new Date(this._task.taskDueDate?.seconds * 1000).toISOString().split('T')[0];
+    }
+  }
+
+  getCurrentDate() {
+    const date = new Date();
+    this.currentDate = date;
+  }
+
+  onChangeDate(e: any) {
+    this._task.taskDueDate = new Date(e);
   }
 
   scrollToTop() {

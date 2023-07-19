@@ -1,6 +1,6 @@
 <div class="offcanvas offcanvas-start bg-body-dark-subtle" tabindex="-1" id="categoryTask" aria-labelledby="categoryTaskLabel">
     <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="categoryTaskLabel">Listas</h5>
+        <h3 class="offcanvas-title" id="categoryTaskLabel">Tasky <i class="bi-journal-check text-primary"></i></h3>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
@@ -10,7 +10,7 @@
                 <form>
                     <div class="input-group rounded-2 shadow">
                         <span class="input-group-text border-0" id="basic-addon1"><i class="bi-list-task"></i></span>
-                        <input [(ngModel)]="category" name="category" type="text" maxlength="100" class="form-control border-0" id="category" placeholder="Add new list">
+                        <input [(ngModel)]="category" name="category" type="text" maxlength="100" class="form-control bg-dark-subtle border-0" id="category" placeholder="Nueva lista">
                     </div>
                 </form>
             </div>
@@ -26,7 +26,7 @@
                         <i class="bi-list-task"></i>
                     </div>
                     <div class="col">
-                        All
+                        Todas las tareas
                     </div>
                     <div *ngIf="allUnfinishedTask > 0" class="col-auto">
                         <span class="badge bg-dark-subtle text-dark-emphasis">{{ allUnfinishedTask }}</span>
@@ -50,7 +50,12 @@
 
         <div class="row mt-5">
             <div class="col">
-                <button class="btn btn-secondary shadow" data-bs-dismiss="offcanvas" (click)="logout()"><i class="bi-box-arrow-left"></i>&nbsp;Logout</button>
+                <h5>{{ user.displayName }}</h5>
+            </div>
+        </div>
+        <div class="row mt-3">
+            <div class="col">
+                <button class="btn btn-secondary shadow" data-bs-dismiss="offcanvas" (click)="logout()"><i class="bi-box-arrow-left"></i>&nbsp;Salir</button>
             </div>
         </div>
 

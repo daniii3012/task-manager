@@ -13,13 +13,24 @@
         </div>
         <div class="row card-text p-1">
             <div class="col">
-                <small *ngIf="task.taskCategory != selectedCategory?.name" class="text-body-secondary">{{ task.taskCategory }}</small>
-                <small *ngIf="!selectedCategory && task.taskDescription" class="text-body-secondary"> &bull; </small>
-                <small *ngIf="!selectedCategory && task.taskDescription" class="text-body-secondary"><i class="bi-sticky"></i></small>
-                <button *ngIf="selectedCategory && task.taskDescription" class="btn btn-outline-secondary rounded-2 btn-sm" (click)="showNotes()" type="button">
+                <!--<small *ngIf="!selectedCategory && task.taskDescription" class="text-body-secondary"><i class="bi-sticky"></i></small>-->
+                <button *ngIf="task.taskDescription && !_showNotes" class="btn btn-outline-secondary rounded-2 btn-sm" (click)="showNotes()" type="button">
+                    <i class="bi-sticky-fill"></i>
+                </button>
+                <button *ngIf="task.taskDescription && _showNotes" class="btn btn-secondary rounded-2 btn-sm" (click)="showNotes()" type="button">
                     <i class="bi-sticky-fill"></i>
                 </button>
 
+                <small *ngIf="task.taskDescription && task.taskDueDate" class="text-body-secondary"> &bull; </small>
+
+                <small *ngIf="task.taskDueDate && ((task.taskDueDate.seconds >= currentDate) || task.status)" class="text-body-secondary"><i class="bi-calendar-event"></i></small>
+                <small *ngIf="task.taskDueDate && ((task.taskDueDate.seconds < currentDate) && !task.status)" class="text-danger"><i class="bi-calendar-event"></i></small>
+                <small *ngIf="task.taskDueDate">&nbsp;</small>
+                <small *ngIf="task.taskDueDate && ((task.taskDueDate.seconds >= currentDate) || task.status)" class="text-body-secondary">{{ task.taskDueDate.seconds * 1000 | date: 'dd/MM/yy' }}</small>
+                <small *ngIf="task.taskDueDate && ((task.taskDueDate.seconds < currentDate) && !task.status)" class="text-danger">{{ task.taskDueDate.seconds * 1000 | date: 'dd/MM/yy' }}</small>
+
+                <small *ngIf="(!selectedCategory && task.taskDescription) || (!selectedCategory && task.taskDueDate)" class="text-body-secondary"> &bull; </small>
+                <small *ngIf="task.taskCategory != selectedCategory?.name" class="text-body-secondary">{{ task.taskCategory }}</small>
                 <!--
                 <small class="text-body-secondary text-lowercase"> &bull; {{ task.taskModificationDate.seconds * 1000 | date: 'dd/mm/yy h:mm a' }}</small>
                 -->
@@ -31,13 +42,15 @@
                 </button>
             </div>
             -->
+            <!-- Se quita el botón de info, se deja unicamente el boton de editar
             <div *ngIf="!selectedCategory" class="col-auto">
-                <!-- Button trigger task info modal -->
+                 Button trigger task info modal 
                 <button *ngIf="!selectedCategory" type="button" class="btn btn-outline-secondary rounded-2 btn-sm" data-bs-toggle="modal" attr.data-bs-target="#infoTaskModal{{ task.id }}">
                     <i class="bi-info-lg"></i>
                 </button>
             </div>
-            <div *ngIf="selectedCategory" class="col-auto">
+            -->
+            <div class="col-auto">
                 <!-- Button trigger task update modal -->
                 <button type="button" class="btn btn-outline-secondary rounded-2 btn-sm" data-bs-toggle="modal" attr.data-bs-target="#updateTaskModal{{ task.id }}">
                     <i class="bi-pencil-fill"></i>
@@ -49,7 +62,20 @@
         </div>
     </div>
     <div *ngIf="_showNotes" class="card-footer">
-        {{ task.taskDescription }}
+        <div class="row px-3 py-2 text-body-secondary">
+            {{ task.taskDescription }}
+        </div>
+        <!--
+        <div *ngIf="task.taskDueDate" class="row px-1 pb-2 text-body-secondary">
+            <div class="col">
+                <small *ngIf="(task.taskDueDate.seconds >= currentDate) || task.status" class="text-body-secondary"><i class="bi-calendar-event"></i></small>
+                <small *ngIf="(task.taskDueDate.seconds < currentDate) && !task.status" class="text-danger"><i class="bi-calendar-event"></i></small>
+                <small>&nbsp;</small>
+                <small *ngIf="(task.taskDueDate.seconds >= currentDate) || task.status" class="text-body-secondary">{{ task.taskDueDate.seconds * 1000 | date: 'dd/MM/yy' }}</small>
+                <small *ngIf="(task.taskDueDate.seconds < currentDate) && !task.status" class="text-danger">{{ task.taskDueDate.seconds * 1000 | date: 'dd/MM/yy' }}</small>
+            </div>
+        </div>
+        -->
     </div>
 </div>
 

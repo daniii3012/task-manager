@@ -11,7 +11,14 @@ export class TaskCategoryListComponent {
   @Input() finishedTasks: any;
   @Input() selectedCategory: any;
 
+  arrowDirection: boolean = false;
+
   ngOnInit() {
+  }
+
+  changeArrow(e: any) {
+    this.arrowDirection = e.target.attributes['aria-expanded'].value == 'true';
+    
   }
 
 }

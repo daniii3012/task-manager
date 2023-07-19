@@ -1,4 +1,4 @@
-<div class="card border-0 shadow">
+<div class="card border-0 shadow-sm">
   <div class="card-body bg-body-tertiary" [ngClass]="{'rounded-2': !isShowMore, 'rounded-top': isShowMore}">
     <div class="row card-text p-1">
       <div class="col text-light-emphasis">
@@ -6,7 +6,7 @@
           <div class="input-group rounded-2 shadow-sm">
             <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon1"><i class="bi-journal-plus"></i></span>
             <input *ngIf="!selectedCategory" type="text" class="form-control border-0" placeholder="Selecciona una lista" data-bs-toggle="offcanvas" data-bs-target="#categoryTask" aria-controls="categoryTask" (click)="getSelectedCategory(_selectedCategory)" [readonly]="selectedCategory == null">
-            <input *ngIf="selectedCategory" [(ngModel)]="taskTitle" (focus)="show()" (blur)="hide()" name="taskTitle" type="text" maxlength="250" class="form-control border-0" id="taskTitle" [placeholder]="getPlaceholder()">
+            <input *ngIf="selectedCategory" [(ngModel)]="taskTitle" (focus)="show()" name="taskTitle" type="text" maxlength="250" class="form-control border-0" id="taskTitle" [placeholder]="getPlaceholder()">
           </div>
         </form>
       </div>
@@ -17,7 +17,38 @@
   </div>
   <div *ngIf="isShowMore" class="card-footer text-body-secondary">
     <div class="row px-1">
-      
+      <form>
+        <div class="input-group rounded-2 shadow-sm my-1">
+          <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon2"><i class="bi-sticky-fill"></i></span>
+          <div class="form-floating">
+            <textarea [(ngModel)]="taskDescription" (input)="autoSizeTextareaDescription()" (focus)="autoSizeTextareaDescription()" name="taskDescription" maxlength="750" class="form-control bg-body-tertiary border-0" style="resize: none;" id="taskDescription" placeholder="Add notes"></textarea>
+            <label for="taskDescription">Notas</label>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="row px-1">
+      <div class="col">
+        <form>
+          <div class="input-group rounded-2 shadow-sm my-1">
+            <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon2"><i class="bi-calendar-plus"></i></span>
+            <div class="form-floating">
+              <input [(ngModel)]="taskDate" type="date" name="taskDate" class="form-control bg-body-tertiary border-0" id="taskDate" min="{{ currentDate | date: 'yyyy-MM-dd' }}">
+              <label for="taskDate">Fecha</label>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!--
+      <div class="col">
+        <form>
+          <div class="input-group rounded-2 shadow-sm my-1">
+            <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon2"><i class="bi-clock-fill"></i></span>
+            <input [(ngModel)]="taskTime" type="time" name="taskTime" class="form-control bg-body-tertiary border-0" id="taskTime" min="{{ currentDate | date: 'h:mm' }}" [disabled]="!taskDate">
+          </div>
+        </form>
+      </div>
+      -->
     </div>
   </div>
 </div>

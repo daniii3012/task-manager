@@ -35,6 +35,7 @@ export class TaskService {
       //taskCategory: this.selectedCategory.name,
       //catId: this.selectedCategory.id,
       taskModificationDate: new Date(),
+      taskDueDate: task.taskDueDate
       //status: false,
     });
   }
@@ -71,13 +72,14 @@ export class TaskService {
       where('uid', '==', uid)));
   }
 
-  // sin id de usuario
+  /* sin id de usuario
   getUnfinishedTaskByCategoryCount(catId: any) {
     return getCountFromServer(
       query(collection(this.firestore, 'task'),
       where('status', '==', false),
       where('catId', '==', catId)));
   }
+  */
 
   // deprecated
 

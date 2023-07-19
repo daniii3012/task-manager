@@ -51,7 +51,20 @@ export class TaskCategorySelectionComponent {
     }
     //this._selectedCategory = local;
 
+    this.scrollToTop();
+
     this.selectedCategory.emit(cat)
+  }
+
+  getSelectedCategoryInfo(cat:any) {
+    if (cat) {
+      this.catService.getCategoryById(cat.id).then(
+        ref => {
+          this._selectedCategory = ref.data();
+          this._selectedCategory.id = ref.id;
+        }
+      );
+    }
   }
 
   addCategory(cat: any) {
@@ -88,4 +101,12 @@ export class TaskCategorySelectionComponent {
     }
   }
   */
+
+  scrollToTop() {
+    window.scroll({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+  }
 }

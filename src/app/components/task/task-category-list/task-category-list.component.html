@@ -2,6 +2,12 @@
     <app-task-item *ngFor="let task of unfinishedTasks" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
 </div>
 
-<div *ngIf="finishedTasks">
+<button *ngIf="finishedTasks?.length != 0" (click)="changeArrow($event)" class="btn bg-secondary-subtle text-dark-emphasis shadow mb-3" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFinished" aria-expanded="false" aria-controls="collapseFinished">
+    <i class="" [ngClass]="{'bi-caret-right-fill': !arrowDirection, 'bi-caret-down-fill': arrowDirection}"></i>
+    Tareas finalizadas
+    <span class="badge bg-body text-dark-emphasis">{{ finishedTasks?.length }}</span>
+</button>
+
+<div *ngIf="finishedTasks" class="collapse" id="collapseFinished">
     <app-task-item *ngFor="let task of finishedTasks" [task]="task" [selectedCategory]="selectedCategory"></app-task-item>
 </div>

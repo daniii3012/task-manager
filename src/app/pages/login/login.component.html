@@ -1,2 +1,24 @@
-<button type="button" class="btn btn-primary" (click)="login()">login</button>
-<button type="button" class="btn btn-secondary" (click)="logout()">Secondary</button>
+<div class="container">
+    <div class="row justify-content-center p-2 pt-4">
+        <div class="col-sm-12 col-md-8 col-lg-6 col-xl-5 col-xxl-4">
+            <div *ngIf="!isLogged()" class="card border-0 shadow rounded-4">
+                <div class="card-body text-center bg-body-tertiary rounded-4">
+                    <h2 class="card-title fw-bold m-4 mb-2">Bienvenido a Tasky</h2>
+                    <h1 class="card-title fw-bold mt-2"><i class="bi-journal-check text-primary"></i></h1>
+                    <p class="m-4 py-4">Maximiza tu productividad con Tasky. Organízate y alcanza tus metas fácilmente. ¡Ingresa ahora!</p>
+                    <div class="d-grid m-4">
+                        <button class="btn btn-primary btn-lg shadow" type="button" (click)="login()"><i class="bi-google"></i> Ingresar con Google</button>
+                    </div>
+                </div>
+            </div>
+            <div *ngIf="isLogged()" class="card border-0 shadow rounded-4">
+                <div class="card-body text-center bg-body-tertiary rounded-4">
+                    <h2 class="card-title fw-bold m-4 mb-2">Continúa a Tasky</h2>
+                    <div class="d-grid m-4">
+                        <button class="btn btn-secondary btn-lg shadow" type="button" routerLink="/tasks"><i class="bi-journal-check"></i> Ingresar a Tasky</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

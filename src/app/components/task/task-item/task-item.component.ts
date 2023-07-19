@@ -16,10 +16,18 @@ export class TaskItemComponent {
 
   _showNotes: boolean = false;
 
+  currentDate: any;
+  _currentDate = new Date();
+
   constructor(
     private taskService: TaskService,
     private categoryService: CategoryService
   ) {
+  }
+
+  ngOnInit() {
+    this.getCurrentDate();
+    //console.log(this.task.id);
   }
 
   updateTask(task: any) {
@@ -49,6 +57,11 @@ export class TaskItemComponent {
 
   showNotes() {
     this._showNotes = !this._showNotes;
+  }
+
+  getCurrentDate() {
+    this._currentDate.setDate(this._currentDate.getDate() - 1);
+    this.currentDate = this._currentDate.getTime() / 1000;
   }
 
   scrollToTop() {

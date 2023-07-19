@@ -9,6 +9,18 @@ import { AuthService } from 'src/app/services/auth/auth.service';
 export class LoginComponent {
   
   constructor(private authService: AuthService) {
+    this.isLogged();
+    this.getUser();
+  }
+
+  isLogged() {
+    return this.authService.isLogged();
+  }
+
+  getUser() {
+    if(this.isLogged()) {
+      return this.authService.getUser();
+    }
   }
 
   login() {

@@ -41,7 +41,7 @@ export class TaskListOffcanvasComponent {
     this.categorySubscription = this.catService.getCategoriesByUser(this.user.uid).subscribe(
       data => {
         this.categories = data;
-        this.getAllUnfinishedTaskCount();
+        //this.getAllUnfinishedTaskCount(); aumenta al doble la cantidad de operaciones de lectura a documentos
       }
     );
   }

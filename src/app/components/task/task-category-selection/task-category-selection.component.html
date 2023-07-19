@@ -1,12 +1,12 @@
 <div class="row">
     <div class="col-auto">
         <!-- Button trigger offcanvas -->
-        <button class="btn btn-outline-primary border-2" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoryTask" aria-controls="categoryTask" (click)="getSelectedCategory(_selectedCategory)">
+        <button class="btn btn-outline-primary border-2 shadow-sm" type="button" data-bs-toggle="offcanvas" data-bs-target="#categoryTask" aria-controls="categoryTask"><!-- (click)="getSelectedCategory(_selectedCategory)" -->
             <i class="bi-list"></i>
         </button>
     </div>
     <div *ngIf="!_selectedCategory" class="col align-self-center fw-bold">
-        All
+        Todas las tareas
     </div>
     <div *ngIf="_selectedCategory" class="col align-self-center fw-bold text-truncate">
         {{ _selectedCategory.name }}
@@ -18,20 +18,46 @@
     -->
     <div *ngIf="_selectedCategory" class="col-auto">
         <!-- Button trigger info modal -->
-        <button type="button" class="btn btn-outline-secondary border-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#infoCatModal" (click)="getSelectedCategory(_selectedCategory)">
+        <button type="button" class="btn btn-outline-secondary border-2 shadow-sm" data-bs-toggle="modal" data-bs-target="#infoCatModal" (click)="getSelectedCategoryInfo(_selectedCategory)">
             <i class="bi-info-lg"></i>
         </button>
         <!-- Info modal -->
         <div class="modal fade" id="infoCatModal" data-bs-backdrop="false" tabindex="-1" aria-labelledby="infoCatModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-sm">
                 <div class="modal-content rounded-3 border-0 shadow">
-                    <div class="modal-header">
+                    <div class="modal-header border-bottom-0">
                         <!--<h3 class="modal-title fs-5 text-truncate" id="deleteModalLabel">Eliminar</h3>-->
-                        <h3 class="modal-title fs-5 text-truncate" id="infoCatModalLabel">&nbsp;{{ _selectedCategory.name }}</h3>
+                        <h3 class="modal-title fs-5 text-truncate" id="infoCatModalLabel">{{ _selectedCategory.name }}</h3>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body d-grid">
-                        <button type="button" class="btn border-0" data-bs-dismiss="modal" [ngClass]="{'btn-outline-danger': _selectedCategory.taskCount == 0, 'btn-outline-secondary': _selectedCategory.taskCount > 0}" (click)="deleteCategory(_selectedCategory)" [disabled]="_selectedCategory.taskCount > 0"><i class="bi-trash3-fill"></i>&nbsp;Borrar lista</button>
+                        <div class="row">
+                            <div class="col">
+                                Tareas en la lista
+                            </div>
+                            <div class="col-auto">
+                                <span class="badge bg-dark-subtle text-dark-emphasis">{{ _selectedCategory.taskCount }}</span>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col">
+                                Tareas sin terminar
+                            </div>
+                            <div class="col-auto">
+                                <span class="badge bg-dark-subtle text-dark-emphasis">{{ _selectedCategory.taskUnfinishedCount }}</span>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                Tareas terminadas
+                            </div>
+                            <div class="col-auto">
+                                <span class="badge bg-dark-subtle text-dark-emphasis">{{ _selectedCategory.taskCount - _selectedCategory.taskUnfinishedCount }}</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer my-1">
+                        <button type="button" class="btn border-0 col" data-bs-dismiss="modal" [ngClass]="{'btn-outline-danger': _selectedCategory.taskCount == 0, 'btn-outline-secondary': _selectedCategory.taskCount > 0}" (click)="deleteCategory(_selectedCategory)" [disabled]="_selectedCategory.taskCount > 0"><i class="bi-trash3-fill"></i>&nbsp;Borrar lista</button>
                     </div>
                 </div>
             </div>
