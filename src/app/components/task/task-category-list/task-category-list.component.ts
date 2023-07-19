@@ -17,8 +17,7 @@ export class TaskCategoryListComponent {
   }
 
   changeArrow(e: any) {
-    this.arrowDirection = e.target.attributes['aria-expanded'].value == 'true';
-    
+    this.arrowDirection = e.target.attributes['aria-expanded']?.value == 'true';
   }
 
 }

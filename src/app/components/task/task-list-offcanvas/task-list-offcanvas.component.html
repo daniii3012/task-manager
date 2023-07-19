@@ -7,7 +7,7 @@
 
         <div class="row my-2">
             <div class="col">
-                <form>
+                <form (keyup.enter)="addCategory(category)">
                     <div class="input-group rounded-2 shadow">
                         <span class="input-group-text border-0" id="basic-addon1"><i class="bi-list-task"></i></span>
                         <input [(ngModel)]="category" name="category" type="text" maxlength="100" class="form-control bg-dark-subtle border-0" id="category" placeholder="Nueva lista">

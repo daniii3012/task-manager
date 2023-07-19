@@ -25,10 +25,12 @@ export class TaskItemUpdateModalComponent {
     this.getTaskDueDate();
   }
 
-  updateTask(task: any) {
+  updateTask(task: any) {    
     if (this.taskDueDate) {
       const [year, month, day] = this.taskDueDate.split('-');
       task.taskDueDate = new Date(new Date(+year, month - 1, day));
+    } else {
+      task.taskDueDate = null;
     }
     this.taskService.updateTask(task);
 

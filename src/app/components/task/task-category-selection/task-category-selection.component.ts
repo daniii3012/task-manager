@@ -13,8 +13,7 @@ export class TaskCategorySelectionComponent {
   //@Input() categories: any;
   @Output() selectedCategory = new EventEmitter;
 
-
-  categories: any = [];
+  _categories: any;
   categorySubscription: any;
 
   //category: any;
@@ -56,15 +55,8 @@ export class TaskCategorySelectionComponent {
     this.selectedCategory.emit(cat)
   }
 
-  getSelectedCategoryInfo(cat:any) {
-    if (cat) {
-      this.catService.getCategoryById(cat.id).then(
-        ref => {
-          this._selectedCategory = ref.data();
-          this._selectedCategory.id = ref.id;
-        }
-      );
-    }
+  getCategories(cat: any) {
+    this._categories = cat;
   }
 
   addCategory(cat: any) {
