@@ -1,5 +1,5 @@
 <div class="card border-0 shadow-sm">
-  <div class="card-body bg-body-tertiary" [ngClass]="{'rounded-2': !isShowMore, 'rounded-top': isShowMore}">
+  <div class="card-body bg-body-tertiary" [ngClass]="{'rounded-2': !isShowMore || selectedCategory == null, 'rounded-top': isShowMore && selectedCategory != null}">
     <div class="row card-text p-1">
       <div class="col text-light-emphasis">
         <form (keyup.enter)="addTask()">
@@ -15,13 +15,13 @@
       </div>
     </div>
   </div>
-  <div *ngIf="isShowMore" class="card-footer text-body-secondary">
+  <div *ngIf="isShowMore && selectedCategory != null" class="card-footer text-body-secondary">
     <div class="row px-1">
       <form>
         <div class="input-group rounded-2 shadow-sm my-1">
           <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon2"><i class="bi-sticky-fill"></i></span>
           <div class="form-floating">
-            <textarea [(ngModel)]="taskDescription" (input)="autoSizeTextareaDescription()" (focus)="autoSizeTextareaDescription()" name="taskDescription" maxlength="750" class="form-control bg-body-tertiary border-0" style="resize: none;" id="taskDescription" placeholder="Add notes"></textarea>
+            <textarea [(ngModel)]="taskDescription" (input)="autoSizeTextareaDescription()" (focus)="autoSizeTextareaDescription()" name="taskDescription" maxlength="750" class="form-control bg-body-tertiary border-0" style="resize: none;" id="taskDescription" placeholder="Add notes" [disabled]="selectedCategory == null"></textarea>
             <label for="taskDescription">Notas</label>
           </div>
         </div>
@@ -33,7 +33,7 @@
           <div class="input-group rounded-2 shadow-sm my-1">
             <span class="input-group-text border-0 bg-dark-subtle" id="basic-addon2"><i class="bi-calendar-plus"></i></span>
             <div class="form-floating">
-              <input [(ngModel)]="taskDate" type="date" name="taskDate" class="form-control bg-body-tertiary border-0" id="taskDate" min="{{ currentDate | date: 'yyyy-MM-dd' }}">
+              <input [(ngModel)]="taskDate" type="date" name="taskDate" class="form-control bg-body-tertiary border-0" id="taskDate" min="{{ currentDate | date: 'yyyy-MM-dd' }}" [disabled]="selectedCategory == null">
               <label for="taskDate">Fecha</label>
             </div>
           </div>

@@ -8,19 +8,19 @@
         <div class="row my-2">
             <div class="col">
                 <form (keyup.enter)="addCategory(category)">
-                    <div class="input-group rounded-2 shadow">
+                    <div class="input-group rounded-2 shadow-sm">
                         <span class="input-group-text border-0" id="basic-addon1"><i class="bi-list-task"></i></span>
                         <input [(ngModel)]="category" name="category" type="text" maxlength="100" class="form-control bg-dark-subtle border-0" id="category" placeholder="Nueva lista">
                     </div>
                 </form>
             </div>
             <div class="col-auto">
-                <button type="button" class="btn btn-primary border-0 shadow" (click)="addCategory(category)" [disabled]="!category"><i class="bi-plus-lg"></i></button>
+                <button type="button" class="btn btn-primary border-0 shadow-sm" (click)="addCategory(category)" [disabled]="!category"><i class="bi-plus-lg"></i></button>
             </div>
         </div>
 
         <div class="list-group gap-2">
-            <button type="button" class="list-group-item list-group-item-action border-0 rounded-2 shadow" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory == null}" (click)="getSelectedCategory(null)">
+            <button type="button" class="list-group-item list-group-item-action border-0 rounded-2 shadow-sm" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory == null, 'bg-body-tertiary': _selectedCategory != null}" (click)="getSelectedCategory(null)">
                 <div class="row">
                     <div class="col-auto">
                         <i class="bi-list-task"></i>
@@ -33,7 +33,7 @@
                     </div>
                 </div>
             </button>
-            <button *ngFor="let category of categories" type="button" class="list-group-item list-group-item-action border-0 rounded-2 shadow" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory?.id == category.id}" (click)="getSelectedCategory(category)">
+            <button *ngFor="let category of categories" type="button" class="list-group-item list-group-item-action border-0 rounded-2 shadow-sm" data-bs-dismiss="offcanvas" [ngClass]="{'active': _selectedCategory?.id == category.id, 'bg-body-tertiary': _selectedCategory?.id != category.id}" (click)="getSelectedCategory(category)">
                 <div class="row">
                     <div class="col-auto">
                         <i class="bi-list-ul"></i>
@@ -48,16 +48,17 @@
             </button>
         </div>
 
-        <div class="row mt-5">
-            <div class="col">
-                <h5>{{ user.displayName }}</h5>
+        <div class="row mt-5 mx-0 py-2 bg-body-tertiary rounded-2 shadow-sm">
+            <div class="col-auto align-self-center">
+                <img *ngIf="user.photoURL" src="{{ user.photoURL }}" class="rounded-circle" style="height: 2.5em;" alt="{{ user.displayName }}">
+                <img *ngIf="!user.photoURL" src="https://placehold.co/400x400?text={{ user.displayName }}" class="rounded-circle" style="height: 3em;" alt="{{ user.displayName }}">
+            </div>
+            <div class="col align-self-center text-truncate">
+                {{ user.displayName }}
+            </div>
+            <div class="col-auto align-self-center">
+                <button class="btn btn-secondary shadow-sm" data-bs-dismiss="offcanvas" (click)="logout()"><i class="bi-box-arrow-left"></i>&nbsp;Salir</button>
             </div>
         </div>
-        <div class="row mt-3">
-            <div class="col">
-                <button class="btn btn-secondary shadow" data-bs-dismiss="offcanvas" (click)="logout()"><i class="bi-box-arrow-left"></i>&nbsp;Salir</button>
-            </div>
-        </div>
-
     </div>
 </div>

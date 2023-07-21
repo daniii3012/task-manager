@@ -47,8 +47,10 @@ export class TaskManagerComponent {
   }
 
   getAllTasks() {
-    if (this.unfinishedTaskSubscription)
+    if (this.unfinishedTaskSubscription){
       this.unfinishedTaskSubscription.unsubscribe();
+      this.unfinishedTasks = null;
+    }
 
     this.unfinishedTaskSubscription = this.taskService.getTaskByStatus(false, this.user.uid).subscribe(
       data => {
@@ -56,8 +58,10 @@ export class TaskManagerComponent {
       }
     );
 
-    if (this.finishedTaskSubscription)
+    if (this.finishedTaskSubscription){
       this.finishedTaskSubscription.unsubscribe();
+      this.finishedTasks = null;
+    }
 
     this.finishedTaskSubscription = this.taskService.getTaskByStatus(true, this.user.uid).subscribe(
       data => {
@@ -71,8 +75,10 @@ export class TaskManagerComponent {
     if (cat == null) {
       this.getAllTasks();
     } else {
-      if (this.unfinishedTaskSubscription)
+      if (this.unfinishedTaskSubscription){
         this.unfinishedTaskSubscription.unsubscribe();
+        this.unfinishedTasks = null;
+      }
 
       this.unfinishedTaskSubscription = this.taskService.getTaskByCategoryAndStatus(cat, false, this.user.uid).subscribe(
         data => {
@@ -80,8 +86,10 @@ export class TaskManagerComponent {
         }
       );
 
-      if (this.finishedTaskSubscription)
+      if (this.finishedTaskSubscription){
         this.finishedTaskSubscription.unsubscribe();
+        this.finishedTasks = null;
+      }
 
       this.finishedTaskSubscription = this.taskService.getTaskByCategoryAndStatus(cat, true, this.user.uid).subscribe(
         data => {
